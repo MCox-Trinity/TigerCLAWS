@@ -51,23 +51,7 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
    }
 }
 
-object courseModel{
-    def main(args: Array[String]):Unit = {
-        val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_RAW.txt").getLines()
-        var courses = List[Course]()
-        while(lines.hasNext){
-            Course.fromStrings(lines) match {
-                case Some(c) => {
-                    //println(c)
-                    courses = c :: courses}
-                case None => 
-            }
-        }
-        val a = courses.filter(c => c.dayTimes.length >= 1 && c.facultyData.length >= 1 && c.rooms.length >= 1)
-        a.foreach(println)
-    }
 
-}
 
 
 
