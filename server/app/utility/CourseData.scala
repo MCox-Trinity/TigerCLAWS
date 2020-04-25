@@ -1,11 +1,10 @@
-package models
+package utility
 
 import java.io.File
 
 import scala.collection.mutable
 
-import utility.Course
-import utility.Semester
+
 
 object CourseData {
   // TODO: Figure out how to get rid of faculty who uniformly have no name and better pick faculty names.

@@ -9,9 +9,21 @@ import slick.jdbc.JdbcProfile
 import utility.FacultyInfo
 import java.sql.Time
 import java.text.SimpleDateFormat
+import utility.CourseGroupings
+import utility.CourseGroupings.CourseGroup
 
 
 class courseModel(db:Database)(implicit ec:ExecutionContext){
+    val pathwayMap = {
+        CourseGroupings.pathwaysGroups.map{
+            case CourseGroup(name, accf) => {
+                (name.split("\\(")(0).trim(),accf)
+            }
+        }.zipWithIndex.map{
+            case ((name, accf), id) => (id, pathwayCourse(id,name,accf))
+        }.toMap
+    }
+
     def addCourse(course:Course):Future[Boolean] = {
         val date = course.dayTimes(0)
         val location = course.rooms(0).building + " " + course.rooms(0).room
