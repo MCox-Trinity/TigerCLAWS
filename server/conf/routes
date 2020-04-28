@@ -4,6 +4,7 @@
 
 # Home page
 GET        /                             controllers.Application.login
+GET        /logout                       controllers.Application.logout
 POST       /validateLogin                controllers.Application.validateLogin
 GET        /addCourse                    controllers.Application.addCourse
 

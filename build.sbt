@@ -25,7 +25,8 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
   dependsOn(sharedJvm)
 
 lazy val client = (project in file("client")).settings(commonSettings).settings(
-	name := "TigerClaws-Client",
+  name := "TigerClaws-Client",
+  addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full),
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.9.5",
@@ -33,7 +34,8 @@ lazy val client = (project in file("client")).settings(commonSettings).settings(
 		"me.shadaj" %%% "slinky-core" % "0.6.3",
 		"me.shadaj" %%% "slinky-web" % "0.6.3",
 		"com.typesafe.play" %% "play-json" % "2.8.1"
-  )
+  ),
+  scalacOptions += "-P:scalajs:sjsDefinedByDefault"
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
 
