@@ -5,7 +5,6 @@ import models.Tables._
 import scala.concurrent.Future
 import slick.jdbc.PostgresProfile.api._
 import utility.Course
-import slick.jdbc.JdbcProfile
 import utility.FacultyInfo
 import java.sql.Time
 import java.text.SimpleDateFormat
@@ -14,6 +13,7 @@ import utility.CourseGroupings.CourseGroup
 
 
 class courseModel(db:Database)(implicit ec:ExecutionContext){
+    implicit val model = db
     val pathwayMap = {
         CourseGroupings.pathwaysGroups.map{
             case CourseGroup(name, accf) => {
@@ -61,6 +61,13 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
            } 
        }
    }
+
+   def filterCourse(dept:String): Future[Seq[(String,String)]] = {
+       val base = new TitleFilter(new DeptFilter(new BaseFilter(),"CSCI"), "Low-Level Computing")
+       val result = base.filterCourse()
+       result.map(courseRows => courseRows.map(c => (c.department,c.courseNumber)))
+   }
+
 }
 
 

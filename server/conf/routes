@@ -6,7 +6,7 @@
 GET        /                             controllers.Application.login
 POST       /validateLogin                controllers.Application.validateLogin
 GET        /addCourse                    controllers.Application.addCourse
-
+GET        /filterCourse                 controllers.Application.filterCourse
 # Prefix must match `play.assets.urlPrefix`
 GET        /assets/*file                 controllers.Assets.at(file)
 GET        /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)

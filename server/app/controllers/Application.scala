@@ -34,6 +34,13 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   
   def validateLogin = TODO
 
+  def filterCourse = Action.async{ implicit request =>
+    course_dataset.filterCourse("CSCI").map{ ret =>
+      println(ret.mkString)
+      Ok("")
+    }
+  }
+
   def addCourse = Action.async { implicit request =>
     val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_RAW.txt").getLines()
     var courses = List[Course]()
