@@ -1,0 +1,22 @@
+@(title: String, cssSheet: String)(content: Html)
+<!-- This page is a the container for all of the main application pages. 
+    It includes the navigation menu and other things that are consistent accross the main pages of the app -->
+@main(title, cssSheet){
+    <div class="page">
+        <div class="nav">
+            <div id="left">
+                <a>Home</a>
+            </div>
+            <div id="center">
+                <img src="@routes.Assets.versioned("images/tigericon.png")">
+                <h1>TigerCLAWS</h1>
+            </div>
+            <div id="right">
+                <a>Logout</a>
+            </div>
+        </div>
+        <div class="pageContent">
+            @content
+        </div>
+    </div>
+}

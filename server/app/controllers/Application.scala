@@ -46,6 +46,10 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
     //Ok(views.html.login(loginForm))
   }
 
+  def searchForSections = Action{ implicit request =>
+    Ok(views.html.searchForSections())
+  }
+
   def logout = Action{ implicit request =>
     Ok(views.html.index("Logged out"))
   }
