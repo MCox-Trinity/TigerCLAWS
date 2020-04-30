@@ -32,6 +32,7 @@
 .nav #right:hover, .nav #left:hover, .nav #right:hover a, .nav #left:hover a{
     background-color: #b10e1e;
     text-decoration: underline;
+    color: white;
 }
 .nav div{
     flex: 1;
@@ -43,6 +44,8 @@
 }
 .nav div a{
     height: 100%;
+    color: white;
+    text-decoration: none;
 }
 .nav h1{
     font-size: 2rem;

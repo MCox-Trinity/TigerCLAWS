@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+    justify-content: center;
+    align-items: stretch;
+}
+.container div{
+    flex: 1;
+    height: 100%;
+}
+#search{
+    height: 100%;
+    flex: 2;
+    font-family: 'Sen', sans-serif;
+}
+#search .verticalNavTabs{
+    display: flex;
+    writing-mode:vertical-lr;
+    transform: rotate(-180deg);
+    justify-content: flex-end;
+    margin-left: .5em;
+    padding-bottom: 1em;
+    border-left: solid 1px lightslategrey;
+}
+#search .verticalNavTabs p{
+    padding: 1em;
+    margin-left: -2px;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+#search .verticalNavTabs p.active{
+    border: solid 1px lightslategray;
+    background-color: white;
+    border-left: solid 3px white;
+    color: #780410;
+}
+#search .verticalNavTabs p.active:hover{
+    border-left: solid 3px white;
+}
+#search .verticalNavTabs p:hover{
+    background-color:#efefef;
+    border-left: solid 1px lightslategray;
+}

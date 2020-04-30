@@ -7,13 +7,21 @@ import slinky.web.html._
 
 @react class MainComponent extends Component {
   type Props = Unit
-  case class State(loggedIn: Boolean)
+  case class State(loggedIn: Boolean, viewingPage: String)
   
-  def initialState: State = State(false)
+  // def initialState: State = State(false, "")
+  def initialState: State = State(true, "SearchForSections")
 
   def render(): ReactElement = {
     if (state.loggedIn) {
-      div ("logged in")//MenuComponent(() => setState(state.copy(loggedIn = false)))
+      // div ("logged in")
+      //MenuComponent(() => setState(state.copy(loggedIn = false)))
+      if(state.viewingPage == "SearchForSections"){
+        SearchForSectionsComponent(() => Unit)
+      }
+      else{
+        div ("logged in")
+      }
     } else {
       LoginComponent(() => setState(state.copy(loggedIn = true)))
     }
