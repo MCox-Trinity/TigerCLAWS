@@ -4,7 +4,10 @@
 
 # Home page
 GET        /                             controllers.Application.login
+GET        /logout                       controllers.Application.logout
 POST       /validateLogin                controllers.Application.validateLogin
+# make POST later
+GET        /searchForSections            controllers.Application.searchForSections
 GET        /addCourse                    controllers.Application.addCourse
 GET        /filterCourse                 controllers.Application.filterCourse
 # Prefix must match `play.assets.urlPrefix`

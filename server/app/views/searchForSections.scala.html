@@ -1,0 +1,7 @@
+@()(implicit request:RequestHeader, messagesProvider: MessagesProvider)
+
+@applicationPage("Search For Sections", "stylesheets/searchForSections.css"){
+    <div id="react-root"></div>
+    <input type="hidden" id="react-version" value="">
+    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+}

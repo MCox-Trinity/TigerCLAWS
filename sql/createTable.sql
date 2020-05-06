@@ -21,16 +21,16 @@ CREATE TABLE course (
 
 -----------------  For student and registration 
 
--- CREATE TABLE student (
--- 	id SERIAL PRIMARY KEY, 
--- 	username varchar(20) NOT NULL, 
--- 	password varchar(200) NOT NULL,
---     first_name varchar(20) NOT NULL,
---     middle_name varchar(20) NOT NULL,
---     last_name varchar(20) NOT NULL,
---     email varchar(20) NOT NULL,
---     deleted BOOLEAN NOT NULL
--- );
+CREATE TABLE student (
+ 	id SERIAL PRIMARY KEY, 
+ 	username varchar(20) NOT NULL, 
+ 	password varchar(200) NOT NULL,
+    first_name varchar(20) NOT NULL,
+    middle_name varchar(20) NOT NULL,
+    last_name varchar(20) NOT NULL,
+    email varchar(20) NOT NULL,
+    deleted BOOLEAN NOT NULL
+);
 
 
 -- CREATE TABLE grade(
