@@ -24,6 +24,16 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
         }.toMap
     }
 
+    def getAllPathway(): Seq[shared.Pathway] = {
+        pathwayMap.map{ case (id, pathway) =>
+            shared.Pathway(id, pathway.name)
+        }.toSeq
+    }
+
+    def getAllDepartment(): Future[Seq[String]] = {
+        db.run(models.Tables.Course.map(_.department).distinct.result)
+    }
+
     def addCourse(course:Course):Future[Boolean] = {
         val date = course.dayTimes(0)
         val location = course.rooms(0).building + " " + course.rooms(0).room

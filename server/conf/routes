@@ -4,9 +4,16 @@
 
 # Home page
 GET        /                             controllers.Application.login
+GET        /logout                       controllers.Application.logout
 POST       /validateLogin                controllers.Application.validateLogin
+# make POST later
+GET        /searchForSections            controllers.Application.searchForSections
 GET        /addCourse                    controllers.Application.addCourse
 GET        /filterCourse                 controllers.Application.filterCourse
+GET        /getAllDepartment             controllers.Application.getAllDepartment
+GET        /getAllPathway                controllers.Application.getAllPathway
+
+
 # Prefix must match `play.assets.urlPrefix`
 GET        /assets/*file                 controllers.Assets.at(file)
 GET        /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)

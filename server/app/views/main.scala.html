@@ -13,11 +13,11 @@
 
 
     <!-- Libraries for React -->
-    <!-- <script src="https://unpkg.com/react@@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@@16/umd/react-dom.development.js" crossorigin></script> -->
+    <script src="https://unpkg.com/react@@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@@16/umd/react-dom.development.js" crossorigin></script>
   </head>
   <body>
     @content
-    <!-- @scalajs.html.scripts("client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null) -->
+    @scalajs.html.scripts("TigerClaws-Client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null)
   </body>
 </html>

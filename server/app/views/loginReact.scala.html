@@ -1,0 +1,10 @@
+@()(implicit request:RequestHeader, messagesProvider: MessagesProvider)
+
+@main("Login", "stylesheets/login.css") {
+  <div id="react-root"></div>
+  <input type="hidden" id="react-version" value="">
+  <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+  <input type="hidden" id="validateRoute" value="@routes.Application.validateLogin()">
+  <input type="hidden" id="logoutRoute" value="@routes.Application.logout()">
+  <input type="hidden" id="logoImgRoute" value="@routes.Assets.versioned("images/trinitylogo_noText.png")">
+}
