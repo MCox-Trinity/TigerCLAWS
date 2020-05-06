@@ -196,6 +196,7 @@ import slinky.web.html.tabIndex.tag
                                     state.pathways.zipWithIndex.map { case (d, i) => 
                                         option (d.name)
                                     }
+
                                 ),
                             )
                         ),
