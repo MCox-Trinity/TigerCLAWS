@@ -30,3 +30,10 @@ class DeptFilter(cf: CourseFilter, department:String)(implicit db:Database, ec:E
         previous_filter.map( courseRows => courseRows.filter(_.department == department))
     }
 }
+
+class CourseNumberFilter(cf: CourseFilter, course_number:String)(implicit ec: ExecutionContext) extends CourseFilter{
+    def filterCourse(): Future[Seq[Tables.CourseRow]] = {
+        val previous_filter = cf.filterCourse()
+        previous_filter.map( cooursesRows => cooursesRows.filter(_.courseNumber == course_number))
+    }
+}

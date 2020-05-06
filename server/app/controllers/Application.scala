@@ -67,6 +67,14 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
       }
     }
   }
+  
+  def filterCourse = Action.async{ implicit request =>
+    withJsonBody[FilterRequirement]{ fr =>
+      course_dataset.filterCourse(fr).map{ courses =>
+        Ok(Json.toJson(courses))
+      }
+    }
+  }
 
   def getAllDepartment = Action.async{ implicit request =>
     course_dataset.getAllDepartment().map{ ds =>
@@ -78,12 +86,7 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
     Ok(Json.toJson(course_dataset.getAllPathway()))
   }
 
-  def filterCourse = Action.async{ implicit request =>
-    course_dataset.filterCourse("CSCI").map{ ret =>
-      println(ret.mkString)
-      Ok("")
-    }
-  }
+
 
   def addCourse = Action.async { implicit request =>
     val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_RAW.txt").getLines()

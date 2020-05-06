@@ -8,7 +8,7 @@ import org.scalajs.dom.html
 import slinky.core.facade.ReactElement
 import slinky.core.SyntheticEvent
 import org.scalajs.dom.raw.Event
-import shared.UserData
+import shared._
 import shared.ReadsAndWrites._
 import slinky.web.html.tabIndex.tag
 
@@ -39,7 +39,8 @@ import slinky.web.html.tabIndex.tag
     implicit val ec = scala.concurrent.ExecutionContext.global
     val departmentRoutes = document.getElementById("allDepartments").asInstanceOf[html.Input].value
     val pathwayRoutes = document.getElementById("allPathways").asInstanceOf[html.Input].value
-
+    val searchClassRoutes = document.getElementById("filterCourse").asInstanceOf[html.Input].value
+    val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
     override def componentDidMount(): Unit = {
         getDepartment()
         getPathway()
@@ -61,6 +62,23 @@ import slinky.web.html.tabIndex.tag
         })
     }
 
+    def searchClass(): Unit = {
+       val department_value = document.getElementById("department").asInstanceOf[html.Select].value
+       val department = if (department_value == "") None else Some(department_value)
+       val credit_hour_value = document.getElementById("credit_hour").asInstanceOf[html.Select].value
+       val credit_hour = if(credit_hour_value == "") None else Some(credit_hour_value.toInt)
+       val course_number_value = document.getElementById("course_number").asInstanceOf[html.Input].value
+       val course_number = if(course_number_value == "") None else Some(course_number_value)
+       val course_name_value = document.getElementById("course_name").asInstanceOf[html.Input].value
+       val course_name = if(course_name_value == "") None else Some(course_name_value)
+       val requirements = FilterRequirement(credit_hour,department,course_number,course_name)
+       FetchJson.fetchPost(searchClassRoutes, csrfToken,requirements, (courses: Seq[shared.Course]) => {
+           //todo Needs to display
+           println(courses.mkString(", "))
+       }, e => {
+           println("Fetch error: " + e)
+       })
+    }
 
     def render(): ReactElement =
         div(
@@ -194,7 +212,7 @@ import slinky.web.html.tabIndex.tag
                             div(id:="selectors")(
                                 select(
                                     state.pathways.zipWithIndex.map { case (d, i) => 
-                                        option (d.name)
+                                        option (key := i.toString, d.name)
                                     }
 
                                 ),
@@ -206,7 +224,8 @@ import slinky.web.html.tabIndex.tag
                         div(id:="courseDetailsOptions")(
                             div(className:="courseDetail")(
                                 p("# Credit Hours"),
-                                select(
+                                select(id := "credit_hour")(
+                                    option(""),
                                     option("0"),
                                     option("1"),
                                     option("2"),
@@ -216,10 +235,10 @@ import slinky.web.html.tabIndex.tag
                             ),
                             div(className:="courseDetail")(
                                 p("Subject/Department"),
-                                select(
-                                    //todo - generate programatically
+                                select(id := "department")(
+                                    option(key := "0", ""),
                                     state.departments.zipWithIndex.map { case (d, i) => 
-                                        option (d)
+                                        option (key := (i+1).toString,d)
                                     }
                                     //option("ACCT - Accounting"),
                                 )
@@ -235,7 +254,7 @@ import slinky.web.html.tabIndex.tag
                             ),
                             div(className:="courseDetail")(
                                 p("Course Number"),
-                                input(`type` := "text")
+                                input(`type` := "text", id := "course_number")
                             ),
                             div(className:="courseDetail")(
                                 p("Section"),
@@ -251,7 +270,7 @@ import slinky.web.html.tabIndex.tag
                             ),
                             div(className:="courseDetail")(
                                 p("Course Title Kewords"),
-                                input(`type` := "text")
+                                input(`type` := "text", id := "course_name")
                             ),
                             div(className:="courseDetail")(
                                 p("Instructor Last Name"),
@@ -269,7 +288,7 @@ import slinky.web.html.tabIndex.tag
                     ),
                     div(id:="buttons")(
                         button(className:="btn btn-secondary")("Clear Filters"),
-                        button(className:="btn btn-primary")("Submit"),
+                        button(className:="btn btn-primary", onClick := (e => searchClass()))("Submit"),
                     )
                 )
             )

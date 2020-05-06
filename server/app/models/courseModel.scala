@@ -10,6 +10,7 @@ import java.sql.Time
 import java.text.SimpleDateFormat
 import utility.CourseGroupings
 import utility.CourseGroupings.CourseGroup
+import shared.FilterRequirement
 
 
 class courseModel(db:Database)(implicit ec:ExecutionContext){
@@ -72,10 +73,25 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
        }
    }
 
-   def filterCourse(dept:String): Future[Seq[(String,String)]] = {
-       val base = new TitleFilter(new DeptFilter(new BaseFilter(),"CSCI"), "Low-Level Computing")
-       val result = base.filterCourse()
-       result.map(courseRows => courseRows.map(c => (c.department,c.courseNumber)))
+   def filterCourse(filterRequirement: FilterRequirement): Future[Seq[shared.Course]] = {
+       var courses:CourseFilter  = new BaseFilter()
+       filterRequirement.dept match {
+           case Some(department) => courses = new DeptFilter(courses, department)
+           case None => 
+       }
+
+       filterRequirement.course_name match {
+           case Some(course_name) => courses = new TitleFilter(courses, course_name)
+           case None => 
+       }
+
+       filterRequirement.course_number match{
+           case Some(course_number) => courses = new CourseNumberFilter(courses, course_number)
+           case None => 
+       }
+
+       val result = courses.filterCourse()
+       result.map(courseRows => courseRows.map(c => shared.Course(c.department,c.courseNumber)))
    }
 
 }
