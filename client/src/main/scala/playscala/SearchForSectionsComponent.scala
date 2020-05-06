@@ -13,24 +13,50 @@ import models.ReadsAndWrites._
 
 @react class SearchForSectionsComponent extends Component{
     case class Props(help: () => Unit)
-    case class State( fClassName: String, panelNumber: Int)
+    case class State(currentPanelID:String)
 
-    def initialState: State = State(fClassName = "", 1)
-    implicit val ec = scala.concurrent.ExecutionContext.global
-    
-    val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
+    //panel options are searchResults and filterResults
+    def initialState: State = State(currentPanelID = "filterResults")
 
     def render(): ReactElement = div(className:="container")(
-        div(id:="search")(
-            div(className:="verticalNavTabs")(
-                // bc of CSS, menu items should be listed in reverse order of appearance
-                p("Filters"),
-                p(className := "active")("Search Results")
+        div(id:="searchAndFilter")(
+            div(id:="tabContainer")(searchAndFilterTabs()),
+            div(id:="tabContents")(
+                searchAndFilterContent(),
             ),
-            
         ),
         div(id := "schedulePlanning")(
             h1("Schedules")
         )
     )
+
+    def searchAndFilterContent():ReactElement = 
+    if(state.currentPanelID == "searchResults"){
+        div(id:="searchResults")(
+            h1("Search Results")
+        )
+    } else {
+        div(id:="filterResults")(
+            SearchForSections_FilterResultsComponent(() => Unit)
+        )
+    }
+
+    def searchAndFilterTabs():ReactElement = 
+        if(state.currentPanelID == "searchResults"){
+            div(className:="verticalNavTabs")(
+                // bc of CSS, menu items should be listed in reverse order of appearance
+                p(onClick := (_ => {
+                    setState(State("filterResults"))
+                }))("Filters"),
+                p(className := "active")("Search Results")
+            )
+        } else {
+            div(className:="verticalNavTabs")(
+                // bc of CSS, menu items should be listed in reverse order of appearance
+                p(className := "active")("Filters"),
+                p(onClick := (_ => {
+                    setState(State("searchResults"))
+                }))("Search Results")
+            )
+        }
 }
