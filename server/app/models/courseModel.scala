@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat
 import utility.CourseGroupings
 import utility.CourseGroupings.CourseGroup
 import shared.FilterRequirement
+import play.api.libs.json.JsTrue
 
 
 class courseModel(db:Database)(implicit ec:ExecutionContext){
@@ -80,6 +81,21 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
            case None => 
        }
 
+       filterRequirement.pathwayId match {
+           case Some(pathwayId) => courses = new PathwayFilter(courses,pathwayMap, pathwayId)
+           case None => 
+       }
+       
+       filterRequirement.professor_last match {
+           case Some(last_name) => courses = new ProfessorLastFilter(courses, last_name)
+           case None =>  
+       }
+
+       filterRequirement.credit_hour match {
+           case Some(credit_hour) => courses = new CreditHourFilter(courses, credit_hour) 
+           case None => 
+       }
+
        filterRequirement.course_name match {
            case Some(course_name) => courses = new TitleFilter(courses, course_name)
            case None => 
@@ -88,6 +104,11 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
        filterRequirement.course_number match{
            case Some(course_number) => courses = new CourseNumberFilter(courses, course_number)
            case None => 
+       }
+
+       filterRequirement.section match {
+           case Some(section) => courses = new SectionFilter(courses, section)
+           case None =>  
        }
 
        val result = courses.filterCourse()

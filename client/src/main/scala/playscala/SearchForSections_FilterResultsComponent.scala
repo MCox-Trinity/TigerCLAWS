@@ -11,6 +11,8 @@ import org.scalajs.dom.raw.Event
 import shared._
 import shared.ReadsAndWrites._
 import slinky.web.html.tabIndex.tag
+import org.scalajs.dom.raw.Element
+import slinky.core.CustomAttribute
 
 @react class SearchForSections_FilterResultsComponent extends Component {
     case class Props(help: () => Unit)
@@ -41,6 +43,7 @@ import slinky.web.html.tabIndex.tag
     val pathwayRoutes = document.getElementById("allPathways").asInstanceOf[html.Input].value
     val searchClassRoutes = document.getElementById("filterCourse").asInstanceOf[html.Input].value
     val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
+    
     override def componentDidMount(): Unit = {
         getDepartment()
         getPathway()
@@ -62,16 +65,27 @@ import slinky.web.html.tabIndex.tag
         })
     }
 
+    def parseInput[A <: html.Input](id:String, attribute: String): Option[String] = {
+        val value = document.getElementById(id).asInstanceOf[A].value
+        if(value == "") None else Some(value)
+    }
+
+    def parsePathway(id: String): Option[Int] = {
+        val selection = document.getElementById(id).asInstanceOf[html.Select]
+        val selected_index = selection.selectedIndex
+        val a = selection.options(selected_index).getAttribute("pathwayid")
+        if(a == "-1") None  else Some(a.toInt)
+    }
+
     def searchClass(): Unit = {
-       val department_value = document.getElementById("department").asInstanceOf[html.Select].value
-       val department = if (department_value == "") None else Some(department_value)
-       val credit_hour_value = document.getElementById("credit_hour").asInstanceOf[html.Select].value
-       val credit_hour = if(credit_hour_value == "") None else Some(credit_hour_value.toInt)
-       val course_number_value = document.getElementById("course_number").asInstanceOf[html.Input].value
-       val course_number = if(course_number_value == "") None else Some(course_number_value)
-       val course_name_value = document.getElementById("course_name").asInstanceOf[html.Input].value
-       val course_name = if(course_name_value == "") None else Some(course_name_value)
-       val requirements = FilterRequirement(credit_hour,department,course_number,course_name)
+       val department = parseInput("department", "value")
+       val credit_hour = parseInput("credit_hour", "value").map(_.toInt)
+       val course_number = parseInput("course_number", "value")
+       val course_name = parseInput("course_name", "value")
+       val section = parseInput("section", "value")
+       val last_name = parseInput("last_name", "value")
+       val pathwayId = parsePathway("pathway")
+       val requirements = FilterRequirement(credit_hour,department,course_number,course_name,section,last_name,pathwayId)
        FetchJson.fetchPost(searchClassRoutes, csrfToken,requirements, (courses: Seq[shared.Course]) => {
            //todo Needs to display
            println(courses.mkString(", "))
@@ -80,7 +94,7 @@ import slinky.web.html.tabIndex.tag
        })
     }
 
-    def render(): ReactElement =
+    def render(): ReactElement ={
         div(
             h1(id:="pageTitle")("Filter Search Results"),
             div(id := "filterSection")(
@@ -210,9 +224,10 @@ import slinky.web.html.tabIndex.tag
                                 p("Requirements"),
                             ),
                             div(id:="selectors")(
-                                select(
+                                select(id := "pathway")(
+                                    option(key := "0", "", new CustomAttribute[String]("pathwayid") := "-1"), 
                                     state.pathways.zipWithIndex.map { case (d, i) => 
-                                        option (key := i.toString, d.name)
+                                        option (key := i.toString, d.name, new CustomAttribute[String]("pathwayid") := d.id.toString())
                                     }
 
                                 ),
@@ -240,7 +255,6 @@ import slinky.web.html.tabIndex.tag
                                     state.departments.zipWithIndex.map { case (d, i) => 
                                         option (key := (i+1).toString,d)
                                     }
-                                    //option("ACCT - Accounting"),
                                 )
                             ),
                             div(className:="courseDetail")(
@@ -258,7 +272,7 @@ import slinky.web.html.tabIndex.tag
                             ),
                             div(className:="courseDetail")(
                                 p("Section"),
-                                input(`type` := "text")
+                                input(`type` := "text", id :="section")
                             ),
                             div(className:="courseDetail")(
                                 p("Section Status"),
@@ -274,7 +288,7 @@ import slinky.web.html.tabIndex.tag
                             ),
                             div(className:="courseDetail")(
                                 p("Instructor Last Name"),
-                                input(`type` := "text")
+                                input(`type` := "text", id := "last_name")
                             ),
                             div(className:="courseDetail")(
                                 p("Location"),
@@ -293,4 +307,5 @@ import slinky.web.html.tabIndex.tag
                 )
             )
         );
+     }
 }

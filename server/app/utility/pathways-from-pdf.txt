@@ -207,7 +207,7 @@ BIOL 1322 Ecol & Bioconservation China
 CHEM 1301 The Chemistry of Crime
 CHEM 1303 Chemistry in Everyday Life
 CHEM 1305 The Chemistry of Art
- CHEM 1318 ^ General Chemistry
+ CHEM 1318 General Chemistry
  GEOS 1405 Oceanography
 GEOS 1406 History and Evolution of Life
  GEOS 1409 Earth's Environmental Systems

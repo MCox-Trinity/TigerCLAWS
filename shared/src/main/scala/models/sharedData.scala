@@ -5,7 +5,8 @@ import play.api.libs.json.Json
 case class UserData(username: String, password: String)
 case class Pathway(id: Int, name: String)
 case class FilterRequirement(credit_hour: Option[Int], dept:Option[String],
-          course_number: Option[String], course_name: Option[String])
+          course_number: Option[String], course_name: Option[String], section: Option[String],
+          professor_last: Option[String],pathwayId:Option[Int])
 case class Course(deparment:String, course_number:String)
 
 object ReadsAndWrites {
