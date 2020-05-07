@@ -14,19 +14,14 @@ import utility.Course
 import play.api.libs.json._
 import scala.concurrent.Future
 import models._
-import shared.ReadsAndWrites._
-import shared._
-case class LoginData(username: String, password: String)
+import models.ReadsAndWrites._
+import scala.concurrent.Await
+import scala.concurrent.duration._
+
 
 @Singleton
 class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: MessagesControllerComponents)
   (implicit ec: ExecutionContext) extends MessagesAbstractController(cc) with HasDatabaseConfigProvider[JdbcProfile]{
-  val loginForm = Form(
-    mapping(
-      "Username" -> text(),
-      "Password" -> text()
-    )(LoginData.apply)(LoginData.unapply)
-  )
 
   val model = new studentModel(db)
 
@@ -34,16 +29,15 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
     request.body.asJson.map { body =>
       Json.fromJson[A](body) match { 
         case JsSuccess(a, path) => f(a)
-        case e @ JsError(_) => Future.successful(Redirect(routes.Application.login()))
+        case e @ JsError(_) => Future.successful(Ok("Failed on JSON error"))//Redirect(routes.Application.login()))
       }
-    }.getOrElse(Future.successful(Redirect(routes.Application.login())))
+    }.getOrElse(Future.successful(Ok("Failed on getting request")))//Redirect(routes.Application.login())))
   }
 
   val course_dataset = new models.courseModel(db)
 
   def login = Action{ implicit request =>
     Ok(views.html.loginReact())
-    //Ok(views.html.login(loginForm))
   }
 
   def searchForSections = Action{ implicit request =>
@@ -105,5 +99,11 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
         course_dataset.addCourse(c).map(b => Ok(Json.toJson(b)))
       }
     }
+  }
+
+  def seedUsers = Action.async { implicit request =>
+    //model.getAllUsers().map(users => Ok(Json.toJson(users)))
+    Await.result(model.seedUsers(), 2.seconds)
+    Future.successful(Redirect(routes.Application.login()))
   }
 }

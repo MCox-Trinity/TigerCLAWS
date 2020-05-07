@@ -59,7 +59,7 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
         }
     }
 
-   def findProfessorFirstLastName(professor:String):(String,String) = {
+   def findProfessorFirstLastName(professor:String):(String,String) = { 
        val name = professor.split(" ")
        if(name.length == 4){
            (name(1),name(3))

@@ -34,28 +34,26 @@ import shared.ReadsAndWrites._
         )
       ),
       div ( className := "loginMenuBody", id := "loginForm")(
-        form ( onSubmit := (handleSubmit(_)))(
-          "Username", 
-          br(),
-          input( `type` := "text", value := state.username,
-            onChange :=  (e => setState(state.copy(username = e.target.value)))                       
-          ),
-          br(),br(),
-          "Password",
-          br(),
-          input( `type` := "text", value := state.password,
-            onChange :=  (e => setState(state.copy(password = e.target.value)))                       
-          ),
-          div ( className := "form-actions" )(
-            state.message,
-            button ( `type` := "submit")("Login")
-          )
+        "Username", 
+        br(),
+        input( `type` := "text", value := state.username,
+          onChange :=  (e => setState(state.copy(username = e.target.value)))                       
         ),
+        br(),br(),
+        "Password",
+        br(),
+        input( `type` := "password", value := state.password,
+          onChange :=  (e => setState(state.copy(password = e.target.value)))                       
+        ),
+        div ( className := "form-actions" )(
+          state.message,
+          button ("Login", onClick := (e => login())),
+        )
       ),
     )
   )
 
-  def handleSubmit(e: SyntheticEvent[html.Form, Event]): Unit = {
+  def login(): Unit = {
     FetchJson.fetchPost(validateRoute, csrfToken, UserData(state.username, state.password), (bool: Boolean) => {
       if(bool) {
         props.doLogin()
