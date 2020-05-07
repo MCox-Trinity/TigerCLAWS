@@ -13,7 +13,23 @@ class studentModel(db: Database)(implicit ec: ExecutionContext) {
       studentRow => if (BCrypt.checkpw(password, studentRow.password)) Some(studentRow.id) else None
     })
   }
-}
 
-//Make a createAllUsers route and have it do nothing on front end,
-//but add seed users to database in background.
+  def seedUsers():Future[Unit] = {
+   val inserts = DBIO.seq(Student ++= Seq(
+     StudentRow(1, "placy", BCrypt.hashpw("pass",BCrypt.gensalt()), "Parker", "Emery", "Lacy", "placy@trinity.edu", false),
+     StudentRow(2, "tbutler", BCrypt.hashpw("pass",BCrypt.gensalt()), "Tara", "Glenn", "Butler", "tbutler@trinity.edu", false),
+     StudentRow(3, "mlewis", BCrypt.hashpw("professor",BCrypt.gensalt()), "Mark", "C.", "Lewis", "mlewis@trinity.edu", false)
+   ))
+   db.run(inserts)
+  }
+
+  def getAllUsers(): Future[Seq[UserData]] = {
+    db.run(
+      (for{
+        user <- Student
+      } yield {
+        user
+      }).result
+    ).map(users => users.map(user => UserData(user.username, user.password)))
+  }
+}
