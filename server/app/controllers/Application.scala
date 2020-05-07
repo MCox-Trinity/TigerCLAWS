@@ -18,6 +18,7 @@ import models.ReadsAndWrites._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
+
 @Singleton
 class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: MessagesControllerComponents)
   (implicit ec: ExecutionContext) extends MessagesAbstractController(cc) with HasDatabaseConfigProvider[JdbcProfile]{
@@ -39,6 +40,10 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
     Ok(views.html.loginReact())
   }
 
+  def searchForSections = Action{ implicit request =>
+    Ok(views.html.searchForSections())
+  }
+
   def logout = Action{ implicit request =>
     Ok(views.html.index("Logged out"))
   }
@@ -56,6 +61,26 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
       }
     }
   }
+  
+  def filterCourse = Action.async{ implicit request =>
+    withJsonBody[FilterRequirement]{ fr =>
+      course_dataset.filterCourse(fr).map{ courses =>
+        Ok(Json.toJson(courses))
+      }
+    }
+  }
+
+  def getAllDepartment = Action.async{ implicit request =>
+    course_dataset.getAllDepartment().map{ ds =>
+      Ok(Json.toJson(ds))
+    }
+  }
+
+  def getAllPathway = Action { implicit request =>
+    Ok(Json.toJson(course_dataset.getAllPathway()))
+  }
+
+
 
   def addCourse = Action.async { implicit request =>
     val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_RAW.txt").getLines()

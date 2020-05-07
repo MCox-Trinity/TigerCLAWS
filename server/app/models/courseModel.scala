@@ -5,15 +5,16 @@ import models.Tables._
 import scala.concurrent.Future
 import slick.jdbc.PostgresProfile.api._
 import utility.Course
-import slick.jdbc.JdbcProfile
 import utility.FacultyInfo
 import java.sql.Time
 import java.text.SimpleDateFormat
 import utility.CourseGroupings
 import utility.CourseGroupings.CourseGroup
+import shared.FilterRequirement
 
 
 class courseModel(db:Database)(implicit ec:ExecutionContext){
+    implicit val model = db
     val pathwayMap = {
         CourseGroupings.pathwaysGroups.map{
             case CourseGroup(name, accf) => {
@@ -22,6 +23,16 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
         }.zipWithIndex.map{
             case ((name, accf), id) => (id, pathwayCourse(id,name,accf))
         }.toMap
+    }
+
+    def getAllPathway(): Seq[shared.Pathway] = {
+        pathwayMap.map{ case (id, pathway) =>
+            shared.Pathway(id, pathway.name)
+        }.toSeq
+    }
+
+    def getAllDepartment(): Future[Seq[String]] = {
+        db.run(models.Tables.Course.map(_.department).distinct.result)
     }
 
     def addCourse(course:Course):Future[Boolean] = {
@@ -61,6 +72,28 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
            } 
        }
    }
+
+   def filterCourse(filterRequirement: FilterRequirement): Future[Seq[shared.Course]] = {
+       var courses:CourseFilter  = new BaseFilter()
+       filterRequirement.dept match {
+           case Some(department) => courses = new DeptFilter(courses, department)
+           case None => 
+       }
+
+       filterRequirement.course_name match {
+           case Some(course_name) => courses = new TitleFilter(courses, course_name)
+           case None => 
+       }
+
+       filterRequirement.course_number match{
+           case Some(course_number) => courses = new CourseNumberFilter(courses, course_number)
+           case None => 
+       }
+
+       val result = courses.filterCourse()
+       result.map(courseRows => courseRows.map(c => shared.Course(c.department,c.courseNumber)))
+   }
+
 }
 
 

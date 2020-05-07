@@ -8,8 +8,8 @@ import org.scalajs.dom.html
 import slinky.core.facade.ReactElement
 import slinky.core.SyntheticEvent
 import org.scalajs.dom.raw.Event
-import models.UserData
-import models.ReadsAndWrites._
+import shared.UserData
+import shared.ReadsAndWrites._
 
 @react class LoginComponent extends Component {
   case class Props(doLogin: () => Unit)
