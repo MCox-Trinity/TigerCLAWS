@@ -14,9 +14,10 @@ import utility.Course
 import play.api.libs.json._
 import scala.concurrent.Future
 import models._
-import models.ReadsAndWrites._
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import shared._
+
 
 
 @Singleton
@@ -35,8 +36,16 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   }
 
   val course_dataset = new models.courseModel(db)
-
+  implicit val userDataReads = Json.reads[UserData]
+  implicit val userDataWrites = Json.writes[UserData]
+  implicit val pathwayReads = Json.reads[Pathway]
+  implicit val pathwayWrites = Json.writes[Pathway]
+  implicit val filterRequirementReads = Json.reads[FilterRequirement]
+  implicit val filterRequirementWrites = Json.writes[FilterRequirement]
+  implicit val courseReads = Json.reads[shared.Course]
+  implicit val courseWrites = Json.writes[shared.Course]
   def login = Action{ implicit request =>
+    model.seedUsers()
     Ok(views.html.loginReact())
   }
 
@@ -45,7 +54,7 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   }
 
   def logout = Action{ implicit request =>
-    Ok(views.html.index("Logged out"))
+    Ok(Json.toJson(true)).withSession(request.session - "username")
   }
   
   def validateLogin = Action.async { implicit request =>
