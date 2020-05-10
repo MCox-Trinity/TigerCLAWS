@@ -14,10 +14,11 @@ import utility.Course
 import play.api.libs.json._
 import scala.concurrent.Future
 import models._
-import shared.ReadsAndWrites._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import shared._
+import shared.ReadsAndWrites._
+
 
 
 @Singleton
@@ -46,7 +47,7 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   }
 
   def logout = Action{ implicit request =>
-    Ok(views.html.index("Logged out"))
+    Ok(Json.toJson(true)).withSession(request.session - "username")
   }
   
   def validateLogin = Action.async { implicit request =>
