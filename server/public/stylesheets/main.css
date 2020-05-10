@@ -1,8 +1,57 @@
+/* Original reset.css:
+    http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Original main.css */
 *{
     box-sizing: border-box;
     font-family: 'Sen', sans-serif;
 }
-
 .nav{
     background-color: #780410;
     color: white;
@@ -54,4 +103,403 @@
 .nav img{
     width: 3rem;
     margin-right: 1rem;
+}
+
+/*Original login.css*/
+
+.page{
+    height: 100vh;
+    width: 100vw;
+    background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 60, 0.73)), url("../images/trinityCampus.jpg");
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.loginMenu{
+    background-color: white;
+    width: 30%;
+    height: 35em;
+    box-shadow: 1px 1px 15px rgb(107, 107, 107);
+    padding: 1em;
+}
+.loginMenuHeader{
+    text-align: center;
+    font-family: 'Domine', serif;
+    margin-bottom: 4em;
+    margin-top: 1em;
+}
+.loginMenuHeader .applicationName{
+    margin-bottom: 1em;
+    color: maroon;
+}
+.loginMenuHeader h1{
+    font-size: 1.7em;
+}
+.loginMenuBody{
+    position: relative;
+    height: 20em;
+}
+form{
+    height: 10em;
+}
+dl{
+    margin-top: 3em;
+}
+dd{
+    margin-top: 3em;
+    padding: .5em;
+    border-radius: 2rem;
+}
+dd.info{
+    visibility: hidden;
+}
+input{
+    width: 100%;
+    margin-top: .5em;
+    margin-bottom: 1.5em;
+    height: 2em;
+    border: none;
+    background-color: #EFEFEF;
+}
+button{
+    width: 100%;
+    padding: 1em;
+    background-color: maroon;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+button:hover{
+    background-color: rgb(160, 4, 4);
+}
+
+/* Original searchForSections.css */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+    justify-content: center;
+    align-items: stretch;
+}
+
+.container #searchAndFilter {
+    flex: 2;
+    height: 100%;
+}
+
+.container #schedulePlanning {
+    flex: 1;
+    height: 100%;
+}
+
+#searchAndFilter {
+    height: 100%;
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+#searchAndFilter .verticalNavTabs {
+    height: 100%;
+    display: flex;
+    writing-mode: vertical-lr;
+    transform: rotate(-180deg);
+    justify-content: flex-end;
+    margin-left: .5em;
+    padding-bottom: 1em;
+    border-left: solid 1px lightslategrey;
+}
+
+#searchAndFilter .verticalNavTabs p {
+    padding: 1em;
+    margin-left: -2px;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+#searchAndFilter .verticalNavTabs p.active {
+    border: solid 1px lightslategray;
+    background-color: white;
+    border-left: solid 3px white;
+    color: #780410;
+}
+
+#searchAndFilter .verticalNavTabs p.active:hover {
+    border-left: solid 3px white;
+}
+
+#searchAndFilter .verticalNavTabs p:hover {
+    background-color: #efefef;
+    border-left: solid 1px lightslategray;
+}
+
+#tabContents {
+    padding: 2em;
+    padding-right: 1em;
+    flex-grow: 1;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+}
+
+/* Filter Tab CSS */
+h1#pageTitle {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#filterSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#filterSection p {
+    font-size: 1.3em;
+}
+
+#filterSection h1.sectionHeader {
+    text-align: center;
+    background-color: #498DA0;
+    color: white;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+}
+
+#filterSection h1.subsectionHeader {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+
+#fitsInMySched {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+#fitsInMySched #fitsInMySchedDesc {
+    display: flex;
+    flex-direction: column;
+}
+
+#fitsInMySched .desc {
+    color: grey;
+    font-size: .9em;
+    line-height: 1em;
+}
+
+#specificMeetingTime #meetingTimeOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#meetingTimeOptions .dayOfTheWeekCheckbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+#meetingTimeOptions .dayOfTheWeekCheckbox p {
+    text-align: left;
+    margin-left: 3px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#meetingTimeOptions select {
+    height: 25px;
+    width: 200px;
+}
+
+#meetingTimeOptions .selectOption p {
+    margin-top: 3px;
+}
+
+#pathwaysReqs {
+    background-color: #efefef;
+    padding: .5em;
+    padding-bottom: 2.5em;
+}
+
+#pathwaysReqs h1 {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+}
+
+#pathwaysOptions {
+    display: flex;
+    flex-direction: row;
+    height: 6em;
+}
+
+#pathwaysOptions #itemLabels {
+    width: 40%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#pathwaysOptions #itemLabels p {
+    font-size: 13.3px;
+    min-height: 25px;
+    font-weight: bold;
+}
+
+#pathwaysOptions #selectors {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-left: 1.5em;
+}
+
+#pathwaysOptions #selectors select {
+    width: 100%;
+    height: 25px;
+}
+
+#courseDetailsOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#courseDetailsOptions .courseDetail {
+    min-width: fit-content;
+    flex-grow: 1;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+#courseDetailsOptions .courseDetail p {
+    font-size: 15px;
+    padding: .5em;
+    padding-left: 0;
+}
+
+#courseDetailsOptions .courseDetail select,
+#courseDetailsOptions .courseDetail input {
+    height: 25px;
+    width: 100%;
+}
+
+#buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 2em;
+}
+
+.btn{
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 1em;
+}
+
+.btn-primary {
+    background-color: rgb(147, 180, 64);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: rgb(150, 202, 18);
+    color: white;
+}
+
+.btn-secondary{
+    background-color: #ac3a45;
+    color: white;
+}
+
+.btn-secondary:hover{
+    background-color: #ca182a;
+}
+
+/* Checkbox Drama */
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox input {
+    /* hide default checkbox */
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox .checkmark {
+    /* Create a custom checkbox */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.checkbox:hover input~.checkmark {
+    /* On mouse-over, add a grey background color */
+    background-color: #ccc;
+}
+
+.checkbox input:checked~.checkmark {
+    /* When the checkbox is checked, add a blue background */
+    background-color: rgb(147, 180, 64);
+}
+
+.checkmark:after {
+    /* Create the checkmark/indicator (hidden when not checked) */
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox input:checked~.checkmark:after {
+    /* Show the checkmark when checked */
+    display: block;
+}
+
+.checkbox .checkmark:after {
+    /* Style the checkmark/indicator */
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

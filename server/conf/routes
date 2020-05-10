@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET        /                             controllers.Application.login
+GET        /                             controllers.Application.load
 GET        /logout                       controllers.Application.logout
+
 POST       /validateLogin                controllers.Application.validateLogin
-# make POST later
-GET        /searchForSections            controllers.Application.searchForSections
+#GET        /searchForSections            controllers.Application.searchForSections
 GET        /addCourse                    controllers.Application.addCourse
 POST       /filterCourse                 controllers.Application.filterCourse
 GET        /getAllDepartment             controllers.Application.getAllDepartment

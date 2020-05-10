@@ -38,16 +38,19 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
 
   val course_dataset = new models.courseModel(db)
 
-  def login = Action{ implicit request =>
-    Ok(views.html.loginReact())
+  def load = Action { implicit request =>
+    Ok(views.html.reactPage())
   }
+  // def login = Action{ implicit request =>
+  //   Ok(views.html.loginReact())
+  // }
 
-  def searchForSections = Action{ implicit request =>
-    Ok(views.html.searchForSections())
-  }
+  // def searchForSections = Action{ implicit request =>
+  //   Ok(views.html.searchForSections())
+  // }
 
   def logout = Action{ implicit request =>
-    Ok(Json.toJson(true)).withSession(request.session - "username")
+    Ok(views.html.reactPage()).withSession(request.session - "username")
   }
   
   def validateLogin = Action.async { implicit request =>
@@ -106,6 +109,6 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   def seedUsers = Action.async { implicit request =>
     //model.getAllUsers().map(users => Ok(Json.toJson(users)))
     Await.result(model.seedUsers(), 2.seconds)
-    Future.successful(Redirect(routes.Application.login()))
+    Future.successful(Redirect(routes.Application.load()))
   }
 }
