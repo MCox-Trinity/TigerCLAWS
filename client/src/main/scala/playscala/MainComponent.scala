@@ -10,11 +10,11 @@ import slinky.web.html._
   case class State(loggedIn: Boolean, viewingPage: String)
   
   // def initialState: State = State(false, "")
-  def initialState: State = State(true, "SearchForSections")
+  def initialState: State = State(false, "SearchForSections")
 
   def render(): ReactElement = {
     if (state.loggedIn) {
-      // div ("logged in")
+       //div ("logged in")
       //MenuComponent(() => setState(state.copy(loggedIn = false)))
       if(state.viewingPage == "SearchForSections"){
         SearchForSectionsComponent(() => Unit)

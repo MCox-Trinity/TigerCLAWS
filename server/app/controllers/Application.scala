@@ -14,9 +14,10 @@ import utility.Course
 import play.api.libs.json._
 import scala.concurrent.Future
 import models._
-import models.ReadsAndWrites._
+import shared.ReadsAndWrites._
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import shared._
 
 
 @Singleton

@@ -11,6 +11,7 @@ import org.scalajs.dom.raw.Event
 import shared.UserData
 import shared.ReadsAndWrites._
 
+
 @react class LoginComponent extends Component {
   case class Props(doLogin: () => Unit)
   case class State(username: String, password: String, message: String)
@@ -18,11 +19,9 @@ import shared.ReadsAndWrites._
   def initialState: State = State("", "", "")
   implicit val ec = scala.concurrent.ExecutionContext.global
 
-  val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
-  val validateRoute = document.getElementById("validateRoute").asInstanceOf[html.Input].value
-  val logoImgRoute = document.getElementById("logoImgRoute").asInstanceOf[html.Input].value
-
-  def render(): ReactElement = div ( className := "page")(
+  def render(): ReactElement = {
+    val logoImgRoute = document.getElementById("logoImgRoute").asInstanceOf[html.Input].value
+    div ( className := "page")(
     div ( className := "loginMenu" )(
       div ( className := "loginMenuHeader" )(
         div ( className := "logoContainer")(
@@ -52,8 +51,11 @@ import shared.ReadsAndWrites._
       ),
     )
   )
+}
 
   def login(): Unit = {
+     val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
+    val validateRoute = document.getElementById("validateRoute").asInstanceOf[html.Input].value
     FetchJson.fetchPost(validateRoute, csrfToken, UserData(state.username, state.password), (bool: Boolean) => {
       if(bool) {
         props.doLogin()
