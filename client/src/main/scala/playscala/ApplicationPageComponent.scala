@@ -4,19 +4,32 @@ import slinky.core.annotations.react
 import slinky.core.Component
 import slinky.core.facade.ReactElement
 import slinky.web.html._
+import org.scalajs.dom.document
+import org.scalajs.dom.html
 
 @react class ApplicationPageComponent extends Component {
   case class Props(doLogout: () => Unit)
-  case class State(viewingPage: String)
+  case class State(loggedIn: Boolean, viewingPage: String)
+
+  val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
+    implicit val ec = scala.concurrent.ExecutionContext.global
+
   //Options: SearchForSections, Home
-  def initialState: State = State("SearchForSections")
+  def initialState: State = State(true,"SearchForSections")
 
   def render(): ReactElement = {
       div(
-          NavBarComponent(() => props.doLogout(), () => goHome()),
+          NavBarComponent(() => setState(state.copy(loggedIn = false)), () => goHome()),
           getPageContents()
       )
   }
+ override def componentDidUpdate(prevProps: Props, prevState: State): Unit = {
+    if (state.loggedIn == false) {
+          println("loggin out")
+          logout()
+      }
+ }
+
 
   def getPageContents(): ReactElement = {
         state.viewingPage match {
@@ -26,10 +39,18 @@ import slinky.web.html._
   }
 
   def setPage(id:String) = {
-      setState(state.copy(id))
+      setState(state.copy(viewingPage = id))
   }
 
   def goHome() = {
       setPage("Home")
   }
+   def logout(): Unit = {
+       println("loggin out")
+        FetchJson.fetchGet(logoutRoute, (bool: Boolean) => {
+            props.doLogout()
+        }, e => {
+            println("Fetch error: " + e)
+         })
+    }
 }
