@@ -25,7 +25,6 @@ import org.scalajs.dom.html
   }
  override def componentDidUpdate(prevProps: Props, prevState: State): Unit = {
     if (state.loggedIn == false) {
-          println("loggin out")
           logout()
       }
  }
@@ -46,7 +45,6 @@ import org.scalajs.dom.html
       setPage("Home")
   }
    def logout(): Unit = {
-       println("loggin out")
         FetchJson.fetchGet(logoutRoute, (bool: Boolean) => {
             props.doLogout()
         }, e => {
