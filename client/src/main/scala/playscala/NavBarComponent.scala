@@ -25,7 +25,7 @@ import org.scalajs.dom.html
         h1("TigerCLAWS")
       ),
       div(id:="right")(
-        a(onClick := (_ => props.doLogout))("Logout")
+        a(onClick := (_ => props.doLogout()))("Logout")
       )
     )
   }

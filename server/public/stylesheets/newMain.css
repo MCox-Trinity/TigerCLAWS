@@ -187,14 +187,16 @@
 }
 
 #searchForSectionsPage #tabContents {
-    padding: 2em;
-    padding-right: 1em;
     flex-grow: 1;
     height: calc(100vh - 50px);
     overflow-y: scroll;
 }
 
 /* Filter Tab CSS */
+#filtersTab{
+    padding: 2em;
+    padding-right: 1em;
+}
 #filtersTab h1#pageTitle {
     font-size: 2em;
     font-weight: bold;
@@ -380,4 +382,67 @@
 
 #filtersTab .btn-secondary:hover{
     background-color: #ca182a;
+}
+
+#searchResults{
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+#searchResults .searchItem{
+    background-color: white;
+    width: 90%;
+    padding: .5em;
+}
+
+#searchResults .sectionSearchResultItem-open{
+    display: flex;
+    flex-direction: column;
+}
+
+#searchResults .searchResultItemTitle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    padding: .5em;
+}
+
+#searchResults .searchResultItemTitle:hover{
+    background-color: rgb(212, 235, 238);
+}
+#searchResults .searchResultItemTitle .info{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    padding-right: .5em;
+}
+
+#searchResults .searchResultItemTitle .info .small{
+    flex: 1;
+}
+
+#searchResults .searchResultItemTitle .info .med{
+    flex: 2;
+}
+
+#searchResults .searchResultItemTitle .info .lrg{
+    flex: 4;
+}
+
+#searchResults .searchResultItemTitle img{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+#searchResults .sectionSearchResultItem-open p.desc{
+    margin: 2em;
+    line-height: 1.6em;
+}
+
+#searchResults .sectionSearchResultItem-open .desc em{
+    font-weight: bold;
 }

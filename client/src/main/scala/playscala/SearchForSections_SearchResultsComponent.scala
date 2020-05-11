@@ -5,6 +5,7 @@ import slinky.core.Component
 import slinky.core.facade.ReactElement
 import slinky.web.html.p
 import slinky.core.StatelessComponent
+import slinky.web.html._
 
 
 
@@ -14,7 +15,10 @@ import slinky.core.StatelessComponent
 
     def render(): ReactElement = {
         props.courses.zipWithIndex.map { case (c, i) => 
-            p(c.deparment, c.course_number, c.course_name, c.section, c.time, c.location, c.professor, c.day_of_week)
+            // p(c.deparment, c.course_number, c.course_name, c.section, c.time, c.location, c.professor, c.day_of_week)
+            div(className:="searchItem")(
+                SectionSearchResultItem(c)
+            )
         }
     }
 }

@@ -16,7 +16,7 @@ import shared.ReadsAndWrites._
     case class State(currentPanelID:String, courses: Seq[shared.Course])
 
     //panel options are searchResults and filterResults
-    def initialState: State = State(currentPanelID = "filterResults", Nil)
+    def initialState: State = State(currentPanelID = "searchResults", Nil)
 
     def render(): ReactElement = div(id:="searchForSectionsPage")(
         div(id:="searchAndFilter")(
