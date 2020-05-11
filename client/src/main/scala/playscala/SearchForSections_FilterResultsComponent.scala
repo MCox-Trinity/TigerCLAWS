@@ -48,6 +48,7 @@ import scala.tools.cmd.Opt
     override def componentDidMount(): Unit = {
         getDepartment()
         getPathway()
+        searchClass()
     }
 
     def getDepartment(): Unit = {
