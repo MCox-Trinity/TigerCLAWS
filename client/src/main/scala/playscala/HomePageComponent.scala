@@ -12,7 +12,6 @@ import org.scalajs.dom.html
     case class State(schedules: Seq[String], username: String)
 
     val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
-    val searchForSectionsRoute = document.getElementById("searchForSectionsRoute").asInstanceOf[html.Input].value
     implicit val ec = scala.concurrent.ExecutionContext.global
 
 
@@ -33,14 +32,6 @@ import org.scalajs.dom.html
                 button ("Logout", id:="button-login", onClick := (e => logout()))
             )
         )
-    }
-
-    def searchForSections(): Unit = {
-        FetchJson.fetchGet(searchForSectionsRoute, (bool: Boolean) => {
-            props.doSearchForSections()
-        }, e => {
-            println("fetch error: " + e)   
-        })
     }
 
     def logout(): Unit = {
