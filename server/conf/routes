@@ -12,6 +12,8 @@ GET        /addCourse                    controllers.Application.addCourse
 POST       /filterCourse                 controllers.Application.filterCourse
 GET        /getAllDepartment             controllers.Application.getAllDepartment
 GET        /getAllPathway                controllers.Application.getAllPathway
+POST       /getUsername                  controllers.Application.getUsername
+
 
 GET       /createAllUsers                controllers.Application.seedUsers
 
