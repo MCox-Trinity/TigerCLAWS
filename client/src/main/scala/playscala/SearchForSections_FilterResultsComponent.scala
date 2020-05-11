@@ -15,7 +15,7 @@ import org.scalajs.dom.raw.Element
 import slinky.core.CustomAttribute
 
 @react class SearchForSections_FilterResultsComponent extends Component {
-    case class Props(help: () => Unit)
+    case class Props(help: () => Unit, pass_course: Seq[shared.Course] => Unit)
     case class State(meetingTimeOptions:Array[String], departments:Seq[String], pathways: Seq[shared.Pathway])
 
     def initialState: State = State(meetingTimeOptions = Array(
@@ -87,8 +87,8 @@ import slinky.core.CustomAttribute
        val pathwayId = parsePathway("pathway")
        val requirements = FilterRequirement(credit_hour,department,course_number,course_name,section,last_name,pathwayId)
        FetchJson.fetchPost(searchClassRoutes, csrfToken,requirements, (courses: Seq[shared.Course]) => {
-           //todo Needs to display
-           println(courses.mkString(", "))
+           props.pass_course(courses)
+           //println(courses.mkString(", "))
        }, e => {
            println("Fetch error: " + e)
        })

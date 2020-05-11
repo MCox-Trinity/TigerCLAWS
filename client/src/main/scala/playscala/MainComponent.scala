@@ -9,8 +9,8 @@ import slinky.web.html._
   type Props = Unit
   case class State(loggedIn: Boolean, viewingPage: String)
   
-  def initialState: State = State(false, "")
-  //ef initialState: State = State(true, "SearchForSections")
+  //def initialState: State = State(false, "")
+  def initialState: State = State(true, "SearchForSections")
   // def initialState: State = State(true, "")
 
   def render(): ReactElement = {

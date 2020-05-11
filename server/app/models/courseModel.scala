@@ -112,7 +112,13 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
        }
 
        val result = courses.filterCourse()
-       result.map(courseRows => courseRows.map(c => shared.Course(c.department,c.courseNumber)))
+       result.map(courseRows => courseRows.map{c => 
+            val start_time = c.startTime.toString()
+            val end_time = c.endTime.toString()
+            val time = start_time + " - " + end_time
+            shared.Course(c.department,c.courseNumber,c.title,"Dr. " + c.profLast,c.section,time,c.location)
+       })
+
    }
 
 }

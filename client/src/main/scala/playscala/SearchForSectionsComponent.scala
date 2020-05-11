@@ -13,10 +13,10 @@ import shared.ReadsAndWrites._
 
 @react class SearchForSectionsComponent extends Component{
     case class Props(help: () => Unit)
-    case class State(currentPanelID:String)
+    case class State(currentPanelID:String, courses: Seq[shared.Course])
 
     //panel options are searchResults and filterResults
-    def initialState: State = State(currentPanelID = "filterResults")
+    def initialState: State = State(currentPanelID = "filterResults", Nil)
 
     def render(): ReactElement = div(className:="container")(
         div(id:="searchAndFilter")(
@@ -30,14 +30,18 @@ import shared.ReadsAndWrites._
         )
     )
 
+    def searchResults(courses: Seq[shared.Course]):Unit = {
+        setState(state.copy(courses = courses))
+    }
+
     def searchAndFilterContent():ReactElement = 
     if(state.currentPanelID == "searchResults"){
         div(id:="searchResults")(
-            h1("Search Results")
+            SearchForSections_SearchResultComponent(state.courses)
         )
     } else {
         div(id:="filterResults")(
-            SearchForSections_FilterResultsComponent(() => Unit)
+            SearchForSections_FilterResultsComponent(() => Unit, searchResults)
         )
     }
 
@@ -46,7 +50,7 @@ import shared.ReadsAndWrites._
             div(className:="verticalNavTabs")(
                 // bc of CSS, menu items should be listed in reverse order of appearance
                 p(onClick := (_ => {
-                    setState(State("filterResults"))
+                    setState(state.copy(currentPanelID = "filterResults"))
                 }))("Filters"),
                 p(className := "active")("Search Results")
             )
@@ -55,7 +59,7 @@ import shared.ReadsAndWrites._
                 // bc of CSS, menu items should be listed in reverse order of appearance
                 p(className := "active")("Filters"),
                 p(onClick := (_ => {
-                    setState(State("searchResults"))
+                    setState(state.copy(currentPanelID = "searchResults"))
                 }))("Search Results")
             )
         }
