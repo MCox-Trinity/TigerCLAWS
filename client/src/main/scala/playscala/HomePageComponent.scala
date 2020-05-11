@@ -13,7 +13,7 @@ import org.scalajs.dom.html
 
     
     implicit val ec = scala.concurrent.ExecutionContext.global
-
+    val usernameRoute = document.getElementById("usernameRoute").asInstanceOf[html.Input].value
 
     def initialState: State = State(Nil, "{username not available yet}")
 
@@ -33,6 +33,21 @@ import org.scalajs.dom.html
             // )
         )
     }
+
+    override def componentDidMount(): Unit =  {
+        getUsername()
+    }
+
+    def getUsername(): Unit = {
+        val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
+        FetchJson.fetchPost(usernameRoute, csrfToken, "", (user: String) => {
+            setState(state.copy(username = user))
+        }, e => {
+            println("getUsername fetch error: " + e)
+        })
+    }
+
+    
 
     
 }

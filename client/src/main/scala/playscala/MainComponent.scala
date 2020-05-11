@@ -15,7 +15,7 @@ import slinky.web.html._
 
   def render(): ReactElement = {
     if (state.loggedIn) {
-      ApplicationPageComponent(() => logout())
+      ApplicationPageComponent(() => setState(state.copy(loggedIn = false)))
     } else {
       LoginComponent(() => setState(state.copy(loggedIn = true)))
     }

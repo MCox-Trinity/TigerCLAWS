@@ -50,7 +50,7 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
   // }
 
   def logout = Action{ implicit request =>
-    Ok(views.html.reactPage()).withSession(request.session - "username")
+    Ok(Json.toJson(true)).withSession(request.session - "username")
   }
   
   def validateLogin = Action.async { implicit request =>
@@ -83,6 +83,20 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
 
   def getAllPathway = Action { implicit request =>
     Ok(Json.toJson(course_dataset.getAllPathway()))
+  }
+
+  def getUsername = Action { implicit request => 
+    {
+      val username = request.session.get("username");
+      username match {
+        case Some(value) => {
+          Ok(Json.toJson(value))
+        }
+        case None => {
+          Ok(Json.toJson(""))
+        }
+      }
+    }
   }
 
 

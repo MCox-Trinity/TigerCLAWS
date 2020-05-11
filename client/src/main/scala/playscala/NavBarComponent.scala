@@ -13,6 +13,8 @@ import org.scalajs.dom.html
   def initialState: Unit = Unit
   
   val tigerLogoRoute = document.getElementById("tigerLogo").asInstanceOf[html.Input].value
+  val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
+
   implicit val ec = scala.concurrent.ExecutionContext.global
 
   def render(): ReactElement = {
@@ -29,4 +31,6 @@ import org.scalajs.dom.html
       )
     )
   }
+  
+ 
 }
