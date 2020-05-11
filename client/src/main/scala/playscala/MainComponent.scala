@@ -15,8 +15,6 @@ import slinky.web.html._
 
   def render(): ReactElement = {
     if (state.loggedIn) {
-       //div ("logged in")
-      //MenuComponent(() => setState(state.copy(loggedIn = false)))
       if(state.viewingPage == "SearchForSections"){
         SearchForSectionsComponent(() => Unit)
       }

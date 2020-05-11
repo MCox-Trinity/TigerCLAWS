@@ -11,8 +11,7 @@ import org.scalajs.dom.html
     case class Props(doLogout: () => Unit, doSearchForSections: () => Unit)
     case class State(schedules: Seq[String], username: String)
 
-    val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
-    val searchForSectionsRoute = document.getElementById("searchForSectionsRoute").asInstanceOf[html.Input].value
+    
     implicit val ec = scala.concurrent.ExecutionContext.global
 
 
@@ -25,29 +24,16 @@ import org.scalajs.dom.html
                 h2 ("Welcome " + this.state.username + "!"),
                 p ("This is TigerCLAWS, an improved version of Trinity University's TigerPAWS.")
             ),
-            div (className:="nav") (
-                // button ("Grades (Disabled)"),
-                // button ("View Degree Progress (Disabled)"),
-                // button ("Current Schedule (Disabled)"),
-                button ("Search/Register For Sections", id:="button-search-for-sections", onClick := (e => props.doSearchForSections())),
-                button ("Logout", id:="button-login", onClick := (e => logout()))
-            )
+            NavBarComponent(() => props.doLogout())
+            // div (className:="nav") (
+            //     // button ("Grades (Disabled)"),
+            //     // button ("View Degree Progress (Disabled)"),
+            //     // button ("Current Schedule (Disabled)"),
+            //     button ("Search/Register For Sections", id:="button-search-for-sections", onClick := (e => props.doSearchForSections())),
+            //     button ("Logout", id:="button-login", onClick := (e => logout()))
+            // )
         )
     }
 
-    def searchForSections(): Unit = {
-        FetchJson.fetchGet(searchForSectionsRoute, (bool: Boolean) => {
-            props.doSearchForSections()
-        }, e => {
-            println("fetch error: " + e)   
-        })
-    }
-
-    def logout(): Unit = {
-        FetchJson.fetchGet(logoutRoute, (bool: Boolean) => {
-            props.doLogout()
-        }, e => {
-            println("Fetch error: " + e)
-         })
-    }
+    
 }
