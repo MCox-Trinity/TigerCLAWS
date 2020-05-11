@@ -18,7 +18,7 @@ import shared.ReadsAndWrites._
     //panel options are searchResults and filterResults
     def initialState: State = State(currentPanelID = "filterResults", Nil)
 
-    def render(): ReactElement = div(className:="container")(
+    def render(): ReactElement = div(id:="searchForSectionsPage")(
         div(id:="searchAndFilter")(
             div(id:="tabContainer")(searchAndFilterTabs()),
             div(id:="tabContents")(

@@ -8,7 +8,7 @@ import org.scalajs.dom.document
 import org.scalajs.dom.html
 
 @react class HomePageComponent extends Component {
-    case class Props(doLogout: () => Unit, doSearchForSections: () => Unit)
+    case class Props(setPage: (String) => Unit)
     case class State(schedules: Seq[String], username: String)
 
     
@@ -24,7 +24,6 @@ import org.scalajs.dom.html
                 h2 ("Welcome " + this.state.username + "!"),
                 p ("This is TigerCLAWS, an improved version of Trinity University's TigerPAWS.")
             ),
-            NavBarComponent(() => props.doLogout())
             // div (className:="nav") (
             //     // button ("Grades (Disabled)"),
             //     // button ("View Degree Progress (Disabled)"),

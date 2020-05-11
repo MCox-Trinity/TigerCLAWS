@@ -95,7 +95,7 @@ import slinky.core.CustomAttribute
     }
 
     def render(): ReactElement ={
-        div(
+        div(id:="filtersTab")(
             h1(id:="pageTitle")("Filter Search Results"),
             div(id := "filterSection")(
                 h1(className:="sectionHeader")("By Meeting Time"),

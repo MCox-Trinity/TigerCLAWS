@@ -1,0 +1,383 @@
+/* login */
+#loginPage{
+    height: 100vh;
+    width: 100vw;
+    background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 60, 0.73)), url("../images/trinityCampus.jpg");
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+#loginPage .loginMenu{
+    background-color: white;
+    width: 30%;
+    height: 35em;
+    box-shadow: 1px 1px 15px rgb(107, 107, 107);
+    padding: 1em;
+}
+#loginPage .loginMenuHeader{
+    text-align: center;
+    font-family: 'Domine', serif;
+    margin-bottom: 4em;
+    margin-top: 1em;
+}
+#loginPage .loginMenuHeader .applicationName{
+    margin-bottom: 1em;
+    color: maroon;
+}
+#loginPage .loginMenuHeader h1{
+    font-size: 1.7em;
+}
+#loginPage .loginMenuBody{
+    position: relative;
+    height: 20em;
+}
+#loginPage form{
+    height: 10em;
+}
+#loginPage dl{
+    margin-top: 3em;
+}
+#loginPage dd{
+    margin-top: 3em;
+    padding: .5em;
+    border-radius: 2rem;
+}
+#loginPage dd.info{
+    visibility: hidden;
+}
+#loginPage input{
+    width: 100%;
+    margin-top: .5em;
+    margin-bottom: 1.5em;
+    height: 2em;
+    border: none;
+    background-color: #EFEFEF;
+}
+#loginPage button{
+    width: 100%;
+    padding: 1em;
+    background-color: maroon;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+#loginPage button:hover{
+    background-color: rgb(160, 4, 4);
+}
+
+/* nav bar */
+#nav{
+    background-color: #780410;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+#nav #center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex:10;
+}
+#nav #right, #nav #left{
+    text-align: right;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    font-family: 'Sen', sans-serif;
+}
+#nav #right:hover, #nav #left:hover, #nav #right:hover a, #nav #left:hover a{
+    background-color: #b10e1e;
+    text-decoration: underline;
+    color: white;
+}
+#nav div{
+    flex: 1;
+    height: 100%;
+    align-self: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: center;
+}
+#nav div a{
+    height: 100%;
+    color: white;
+    text-decoration: none;
+}
+#nav h1{
+    font-size: 2rem;
+    font-weight: bold;
+}
+#nav img{
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+/* Original searchForSections.css */
+
+#searchForSectionsPage {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+    justify-content: center;
+    align-items: stretch;
+}
+
+#searchForSectionsPage #searchAndFilter {
+    flex: 2;
+    height: 100%;
+}
+
+#searchForSectionsPage #schedulePlanning {
+    flex: 1;
+    height: 100%;
+}
+
+#searchForSectionsPage #searchAndFilter {
+    height: 100%;
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+#searchForSectionsPage #searchAndFilter .verticalNavTabs {
+    height: 100%;
+    display: flex;
+    writing-mode: vertical-lr;
+    transform: rotate(-180deg);
+    justify-content: flex-end;
+    margin-left: .5em;
+    padding-bottom: 1em;
+    border-left: solid 1px lightslategrey;
+}
+
+#searchForSectionsPage #searchAndFilter .verticalNavTabs p {
+    padding: 1em;
+    margin-left: -2px;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+#searchForSectionsPage #searchAndFilter .verticalNavTabs p.active {
+    border: solid 1px lightslategray;
+    background-color: white;
+    border-left: solid 3px white;
+    color: #780410;
+}
+
+#searchForSectionsPage #searchAndFilter .verticalNavTabs p.active:hover {
+    border-left: solid 3px white;
+}
+
+#searchForSectionsPage #searchAndFilter .verticalNavTabs p:hover {
+    background-color: #efefef;
+    border-left: solid 1px lightslategray;
+}
+
+#searchForSectionsPage #tabContents {
+    padding: 2em;
+    padding-right: 1em;
+    flex-grow: 1;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+}
+
+/* Filter Tab CSS */
+#filtersTab h1#pageTitle {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#filtersTab #filterSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#filtersTab #filterSection p {
+    font-size: 1.3em;
+}
+
+#filtersTab #filterSection h1.sectionHeader {
+    text-align: center;
+    background-color: #498DA0;
+    color: white;
+    font-size: 1em;
+    line-height: 2em;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+}
+
+#filtersTab #filterSection h1.subsectionHeader {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+
+#filtersTab #fitsInMySched {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+#filtersTab #fitsInMySched #fitsInMySchedDesc {
+    display: flex;
+    flex-direction: column;
+}
+
+#filtersTab #fitsInMySched .desc {
+    color: grey;
+    font-size: .9em;
+    line-height: 1em;
+}
+
+#filtersTab #specificMeetingTime #meetingTimeOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#filtersTab #meetingTimeOptions .dayOfTheWeekCheckbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+#filtersTab #meetingTimeOptions .dayOfTheWeekCheckbox p {
+    text-align: left;
+    margin-left: 3px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#filtersTab #meetingTimeOptions select {
+    height: 25px;
+    width: 200px;
+}
+
+#filtersTab #meetingTimeOptions .selectOption p {
+    margin-top: 3px;
+}
+
+#filtersTab #pathwaysReqs {
+    background-color: #efefef;
+    padding: .5em;
+    padding-bottom: 2.5em;
+}
+
+#filtersTab #pathwaysReqs h1 {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+}
+
+#filtersTab #pathwaysOptions {
+    display: flex;
+    flex-direction: row;
+    height: 6em;
+}
+
+#filtersTab #pathwaysOptions #itemLabels {
+    width: 40%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+#filtersTab #pathwaysOptions #itemLabels p {
+    font-size: 13.3px;
+    min-height: 25px;
+    font-weight: bold;
+}
+
+#filtersTab #pathwaysOptions #selectors {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    margin-left: 1.5em;
+}
+
+#filtersTab #pathwaysOptions #selectors select {
+    width: 100%;
+    height: 25px;
+}
+
+#filtersTab #courseDetailsOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#filtersTab #courseDetailsOptions .courseDetail {
+    min-width: fit-content;
+    flex-grow: 1;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+#filtersTab #courseDetailsOptions .courseDetail p {
+    font-size: 15px;
+    padding: .5em;
+    padding-left: 0;
+}
+
+#filtersTab #courseDetailsOptions .courseDetail select,
+#filtersTab #courseDetailsOptions .courseDetail input {
+    height: 25px;
+    width: 100%;
+}
+
+#filtersTab #buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 2em;
+}
+
+#filtersTab .btn{
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 1em;
+}
+
+#filtersTab .btn-primary {
+    background-color: rgb(147, 180, 64);
+    color: white;
+}
+
+#filtersTab .btn-primary:hover {
+    background-color: rgb(150, 202, 18);
+    color: white;
+}
+
+#filtersTab .btn-secondary{
+    background-color: #ac3a45;
+    color: white;
+}
+
+#filtersTab .btn-secondary:hover{
+    background-color: #ca182a;
+}

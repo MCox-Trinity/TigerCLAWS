@@ -21,7 +21,7 @@ import shared.ReadsAndWrites._
 
   def render(): ReactElement = {
     val logoImgRoute = document.getElementById("logoImgRoute").asInstanceOf[html.Input].value
-    div ( className := "page")(
+    div ( id := "loginPage")(
     div ( className := "loginMenu" )(
       div ( className := "loginMenuHeader" )(
         div ( className := "logoContainer")(
