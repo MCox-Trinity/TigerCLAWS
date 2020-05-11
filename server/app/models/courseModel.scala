@@ -111,12 +111,17 @@ class courseModel(db:Database)(implicit ec:ExecutionContext){
            case None =>  
        }
 
+       filterRequirement.days match {
+           case Some(days) => courses = new DayFilter(courses, days)
+           case None =>  
+       }
+
        val result = courses.filterCourse()
        result.map(courseRows => courseRows.map{c => 
             val start_time = c.startTime.toString()
             val end_time = c.endTime.toString()
             val time = start_time + " - " + end_time
-            shared.Course(c.department,c.courseNumber,c.title,"Dr. " + c.profLast,c.section,time,c.location)
+            shared.Course(c.department,c.courseNumber,c.title,"Dr. " + c.profLast,c.section,time,c.location, c.dayOfWeek)
        })
 
    }

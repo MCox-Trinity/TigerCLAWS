@@ -13,6 +13,7 @@ import shared.ReadsAndWrites._
 import slinky.web.html.tabIndex.tag
 import org.scalajs.dom.raw.Element
 import slinky.core.CustomAttribute
+import scala.tools.cmd.Opt
 
 @react class SearchForSections_FilterResultsComponent extends Component {
     case class Props(help: () => Unit, pass_course: Seq[shared.Course] => Unit)
@@ -77,6 +78,20 @@ import slinky.core.CustomAttribute
         if(a == "-1") None  else Some(a.toInt)
     }
 
+
+    def parseDays():Option[Seq[String]] = {
+        val days = Seq("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+        val d = days.map{ d => 
+            val day = document.getElementById(d).asInstanceOf[html.Input].checked
+            if(day){
+                if(d == "Thursday") "R" else d(0).toString()
+            } else{
+                ""
+            }
+        }.filter(_ != "")
+        if(d.length != 0) Some(d) else None 
+    }
+
     def searchClass(): Unit = {
        val department = parseInput("department", "value")
        val credit_hour = parseInput("credit_hour", "value").map(_.toInt)
@@ -85,7 +100,8 @@ import slinky.core.CustomAttribute
        val section = parseInput("section", "value")
        val last_name = parseInput("last_name", "value")
        val pathwayId = parsePathway("pathway")
-       val requirements = FilterRequirement(credit_hour,department,course_number,course_name,section,last_name,pathwayId)
+       val days = parseDays()
+       val requirements = FilterRequirement(credit_hour,department,course_number,course_name,section,last_name,pathwayId,days)
        FetchJson.fetchPost(searchClassRoutes, csrfToken,requirements, (courses: Seq[shared.Course]) => {
            props.pass_course(courses)
            //println(courses.mkString(", "))
@@ -118,7 +134,7 @@ import slinky.core.CustomAttribute
                         div(className:="dayOfTheWeekCheckbox")(
                             div(
                                 label(className := "checkbox")(
-                                    input(`type` := "checkbox"),
+                                    input(`type` := "checkbox", id := "Monday"),
                                     span(className := "checkmark")
                                 ),
                             ),
@@ -128,7 +144,7 @@ import slinky.core.CustomAttribute
                         div(className:="dayOfTheWeekCheckbox")(
                             div(
                                 label(className := "checkbox")(
-                                    input(`type` := "checkbox"),
+                                    input(`type` := "checkbox", id := "Tuesday"),
                                     span(className := "checkmark")
                                 ),
                             ),
@@ -138,7 +154,7 @@ import slinky.core.CustomAttribute
                         div(className:="dayOfTheWeekCheckbox")(
                             div(
                                 label(className := "checkbox")(
-                                    input(`type` := "checkbox"),
+                                    input(`type` := "checkbox", id := "Wednesday"),
                                     span(className := "checkmark")
                                 ),
                             ),
@@ -148,7 +164,7 @@ import slinky.core.CustomAttribute
                         div(className:="dayOfTheWeekCheckbox")(
                             div(
                                 label(className := "checkbox")(
-                                    input(`type` := "checkbox"),
+                                    input(`type` := "checkbox", id := "Thursday"),
                                     span(className := "checkmark")
                                 ),
                             ),
@@ -158,7 +174,7 @@ import slinky.core.CustomAttribute
                         div(className:="dayOfTheWeekCheckbox")(
                             div(
                                 label(className := "checkbox")(
-                                    input(`type` := "checkbox"),
+                                    input(`type` := "checkbox", id := "Friday"),
                                     span(className := "checkmark")
                                 ),
                             ),

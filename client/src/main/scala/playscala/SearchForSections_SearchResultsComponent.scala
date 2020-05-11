@@ -14,7 +14,7 @@ import slinky.core.StatelessComponent
 
     def render(): ReactElement = {
         props.courses.zipWithIndex.map { case (c, i) => 
-            p (c.deparment, c.course_number, c.course_name, c.section, c.time, c.location, c.professor)
+            p(c.deparment, c.course_number, c.course_name, c.section, c.time, c.location, c.professor, c.day_of_week)
         }
     }
 }

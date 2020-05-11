@@ -65,4 +65,18 @@ class PathwayFilter(cf: CourseFilter, pathway: Map[Int, pathwayCourse], id: Int)
         previous_filter.map(courseRows => courseRows.filter(c => pathway(id).acceptFun((c.department, c.courseNumber))))
     }
 }
+
+class DayFilter(cf: CourseFilter, days: Seq[String])(implicit ec: ExecutionContext) extends CourseFilter{
+    override def filterCourse(): Future[Seq[Tables.CourseRow]] = {
+        val previous_filter = cf.filterCourse()
+        previous_filter.map(courseRows => courseRows.filter(c => filterDays(c, days)))
+    }
+
+    def filterDays(c: CourseRow, days: Seq[String]): Boolean = {
+        for(day <- days){
+            if(!c.dayOfWeek.contains(day)) return false
+        }
+        true
+    }
+}
  

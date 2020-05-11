@@ -6,9 +6,9 @@ case class UserData(username: String, password: String)
 case class Pathway(id: Int, name: String)
 case class FilterRequirement(credit_hour: Option[Int], dept:Option[String],
           course_number: Option[String], course_name: Option[String], section: Option[String],
-          professor_last: Option[String],pathwayId:Option[Int])
+          professor_last: Option[String],pathwayId:Option[Int], days:Option[Seq[String]])
 case class Course(deparment:String, course_number:String, course_name:String, professor:String, section:String,
-                  time:String, location:String)
+                  time:String, location:String, day_of_week: String)
 
 object ReadsAndWrites {
   implicit val userDataReads = Json.reads[UserData]
