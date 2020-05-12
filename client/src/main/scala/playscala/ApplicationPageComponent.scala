@@ -9,13 +9,13 @@ import org.scalajs.dom.html
 
 @react class ApplicationPageComponent extends Component {
   case class Props(doLogout: () => Unit)
-  case class State(loggedIn: Boolean, viewingPage: String)
+  case class State(loggedIn: Boolean, viewingPage: String,  scheduleCourses: Seq[shared.Course])
 
   val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
     implicit val ec = scala.concurrent.ExecutionContext.global
 
   //Options: SearchForSections, Home
-  def initialState: State = State(true,"Home")
+  def initialState: State = State(true,"Home", Nil)
 
   def render(): ReactElement = {
       div(
@@ -33,8 +33,19 @@ import org.scalajs.dom.html
   def getPageContents(): ReactElement = {
         state.viewingPage match {
             case "Home" => HomePageComponent((id:String) => setPage(id))
-            case "SearchForSections" => SearchForSectionsComponent(() => Unit)
+            case "SearchForSections" => SearchForSectionsComponent(() => Unit, 
+                                                            (course: shared.Course) => addToActiveSchedule(course), 
+                                                            (course: shared.Course) => removeFromActiveSchedule(course),
+                                                            state.scheduleCourses)
         }
+  }
+  
+  def removeFromActiveSchedule(course: shared.Course) {
+      setState(state.copy(scheduleCourses = state.scheduleCourses.filter(c => c != course)))
+  }
+
+  def addToActiveSchedule(course: shared.Course) {
+      setState(state.copy(scheduleCourses = state.scheduleCourses :+ course))
   }
 
   def setPage(id:String) = {

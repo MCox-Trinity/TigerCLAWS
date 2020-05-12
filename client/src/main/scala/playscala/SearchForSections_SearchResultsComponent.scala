@@ -10,14 +10,14 @@ import slinky.web.html._
 
 
 @react class SearchForSections_SearchResultComponent extends StatelessComponent{
-    case class Props(courses: Seq[shared.Course])
+    case class Props(courses: Seq[shared.Course], addToActiveSchedule: (shared.Course) => Unit)
 
 
     def render(): ReactElement = {
         props.courses.zipWithIndex.map { case (c, i) => 
             // p(c.deparment, c.course_number, c.course_name, c.section, c.time, c.location, c.professor, c.day_of_week)
             div(className:="searchItem")(
-                SectionSearchResultItem(c)
+                SectionSearchResultItem(c, props.addToActiveSchedule)
             )
         }
     }

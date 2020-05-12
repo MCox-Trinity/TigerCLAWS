@@ -5,16 +5,14 @@
 # Home page
 GET        /                             controllers.Application.load
 GET        /logout                       controllers.Application.logout
-
 POST       /validateLogin                controllers.Application.validateLogin
-#GET        /searchForSections            controllers.Application.searchForSections
-GET        /addCourse                    controllers.Application.addCourse
+
 POST       /filterCourse                 controllers.Application.filterCourse
 GET        /getAllDepartment             controllers.Application.getAllDepartment
 GET        /getAllPathway                controllers.Application.getAllPathway
 POST       /getUsername                  controllers.Application.getUsername
 
-
+GET        /addCourse                    controllers.Application.addCourse
 GET       /createAllUsers                controllers.Application.seedUsers
 
 # Prefix must match `play.assets.urlPrefix`

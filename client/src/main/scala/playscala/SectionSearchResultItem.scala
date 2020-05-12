@@ -13,7 +13,7 @@ import shared._
 import shared.ReadsAndWrites._
 
 @react class SectionSearchResultItem extends Component{
-    case class Props(course: shared.Course)
+    case class Props(course: shared.Course, addToActiveSchedule: (shared.Course) => Unit)
     case class State(open:Boolean)
 
     def initialState: State = State(open = false)
@@ -42,7 +42,7 @@ import shared.ReadsAndWrites._
                 p(className:="med")(props.course.professor),
                 p(className:="med")(s"${props.course.day_of_week}, ${props.course.time}"),
             ),
-            img(src:=plusIcon)
+            img(src:=plusIcon, onClick := (_ => props.addToActiveSchedule(props.course)))
         )
     }
 

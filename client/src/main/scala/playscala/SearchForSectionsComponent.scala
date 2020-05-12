@@ -12,7 +12,11 @@ import shared._
 import shared.ReadsAndWrites._
 
 @react class SearchForSectionsComponent extends Component{
-    case class Props(help: () => Unit)
+    case class Props(help: () => Unit, 
+        addToActiveSchedule: (shared.Course) => Unit, 
+        removeFromActiveSchedule: (shared.Course) => Unit, 
+        scheduleCourses: Seq[shared.Course])
+
     case class State(currentPanelID:String, courses: Seq[shared.Course])
 
     //panel options are searchResults and filterResults
@@ -26,7 +30,7 @@ import shared.ReadsAndWrites._
             ),
         ),
         div(id := "schedulePlanning")(
-            h1("Schedules")
+            ScheduleComponent(props.scheduleCourses, props.removeFromActiveSchedule)
         )
     )
 
@@ -37,7 +41,7 @@ import shared.ReadsAndWrites._
     def searchAndFilterContent():ReactElement = 
     if(state.currentPanelID == "searchResults"){
         div(id:="searchResults")(
-            SearchForSections_SearchResultComponent(state.courses)
+            SearchForSections_SearchResultComponent(state.courses, props.addToActiveSchedule)
         )
     } else {
         div(id:="filterResults")(
