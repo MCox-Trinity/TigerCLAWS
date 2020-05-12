@@ -14,23 +14,72 @@ import org.scalajs.dom.html
     
     implicit val ec = scala.concurrent.ExecutionContext.global
     val usernameRoute = document.getElementById("usernameRoute").asInstanceOf[html.Input].value
+    val tigerLogoRoute = document.getElementById("tigerLogo").asInstanceOf[html.Input].value
 
     def initialState: State = State(Nil, "{username not available yet}")
 
     def render(): ReactElement = {
-        div (
-            div (className:="Header") (
-                h1 ("Home Page"),
-                h2 ("Welcome " + this.state.username + "!"),
-                p ("This is TigerCLAWS, an improved version of Trinity University's TigerPAWS.")
+        div(id:="homePage") (
+            div(id:="left")(
+                img(src:=tigerLogoRoute),
+                h1(s"Welcome Back, ${usernameRoute}!")
             ),
-            // div (className:="nav") (
-            //     // button ("Grades (Disabled)"),
-            //     // button ("View Degree Progress (Disabled)"),
-            //     // button ("Current Schedule (Disabled)"),
-            //     button ("Search/Register For Sections", id:="button-search-for-sections", onClick := (e => props.doSearchForSections())),
-            //     button ("Logout", id:="button-login", onClick := (e => logout()))
-            // )
+            div(id:="right")(
+                section(
+                    h1("My Account"),
+                    div(className:="options")(
+                        a("Tigerbucks Online Deposit"),
+                        a("My Temporary T-Mail Password"),
+                        a("Emergency Information"),
+                        a("Self Service Banking Info"),
+                        a("User Profile"),
+                    )
+                ),
+                section(
+                    h1("Registration"),
+                    div(className:="options")(
+                        a("Class Schedule/Most Current"),
+                        a("Courses of Study Bulletin"),
+                        a(className:="working", onClick := (_ => props.setPage("SearchForSections")))("Search for Sections"),
+                        a("Express Registration"),
+                        a("Search/Register for Sections"),
+                        a("Add and Drop Classes"),
+                        a("Manage My Waitlist"),
+                        a("Registration Status"),
+                        a("My class schedule"),
+                        a("TrinALERT Emergency System")
+                    )
+                ),
+                section(
+                    h1("Financial Information"),
+                    div(className:="options")(
+                        a("Student Account Suite"),
+                        a("Student Tax Information"),
+                    )
+                ),
+                section(
+                    h1("Communication"),
+                    div(className:="options")(
+                        a("My Documents"),
+                    )
+                ),
+                section(
+                    h1("Academic Profile"),
+                    div(className:="options")(
+                        a("Grades"),
+                        a("Grade Point Average by Term"),
+                        a("Transcript"),
+                        a("Degree Audit - Common Curriculum: Catalog 2014-2015 and previous"),
+                        a("Degree Audit - Pathways: Catalog 2015-16 and later"),
+                        a("Test Summary"),
+                        a("Apply for Graduation"),
+                        a("Transcript Request & Status"),
+                        a("Enrollment Verification & Status"),
+                        a("My class schedule"),
+                        a("My profile")
+                    )
+                ),
+            )
         )
     }
 

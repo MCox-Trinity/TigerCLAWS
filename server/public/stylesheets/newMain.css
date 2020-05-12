@@ -446,3 +446,64 @@
 #searchResults .sectionSearchResultItem-open .desc em{
     font-weight: bold;
 }
+
+/* Home page */
+
+#homePage{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+    justify-content: center;
+    align-items: stretch;
+    font-family: 'Sen', sans-serif;
+}
+
+#homePage #left{
+    width: 20%;
+    border-right: solid 1px grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#homePage #left h1{
+    font-size: 1.6em;
+    text-align: center;
+}
+#homePage #right{
+    width: 80%;
+    padding: 2.5em;
+    padding-top: 0;
+    height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+}
+#homePage #right section{
+    line-height: 1.6em;
+    margin-top: 2em;
+    width: 35vw;
+    margin-right: 1em;
+}
+/* #homePage #right  */
+#homePage #right section h1{
+    background-color: rgb(160, 4, 4);
+    color: white;
+    text-align: center;
+}
+#homePage #right section .options{
+    display: flex;
+    flex-direction: column;
+}
+
+#homePage #right section .options a.working{
+    text-decoration: underline;
+    color: black;
+}
+
+#homePage #right section .options a.working:hover{
+    text-decoration: underline;
+    color: #780410;
+}
