@@ -16,7 +16,7 @@ import shared.ReadsAndWrites._
     case class State(currentPanelID:String, courses: Seq[shared.Course])
 
     //panel options are searchResults and filterResults
-    def initialState: State = State(currentPanelID = "searchResults", Nil)
+    def initialState: State = State(currentPanelID = "filterResults", Nil)
 
     def render(): ReactElement = div(id:="searchForSectionsPage")(
         div(id:="searchAndFilter")(
@@ -49,18 +49,18 @@ import shared.ReadsAndWrites._
         if(state.currentPanelID == "searchResults"){
             div(className:="verticalNavTabs")(
                 // bc of CSS, menu items should be listed in reverse order of appearance
+                p(className := "active")("Search Results"),
                 p(onClick := (_ => {
                     setState(state.copy(currentPanelID = "filterResults"))
                 }))("Filters"),
-                p(className := "active")("Search Results")
             )
         } else {
             div(className:="verticalNavTabs")(
                 // bc of CSS, menu items should be listed in reverse order of appearance
-                p(className := "active")("Filters"),
                 p(onClick := (_ => {
                     setState(state.copy(currentPanelID = "searchResults"))
-                }))("Search Results")
+                }))("Search Results"),
+                p(className := "active")("Filters"),
             )
         }
 }
