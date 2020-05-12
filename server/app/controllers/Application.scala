@@ -102,7 +102,7 @@ class Application @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
 
 
   def addCourse = Action.async { implicit request =>
-    val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_RAW.txt").getLines()
+    val lines = scala.io.Source.fromFile("./server/app/utility/CSAR_Raw.txt").getLines()
     var courses = List[Course]()
     while(lines.hasNext){
         Course.fromStrings(lines) match {
