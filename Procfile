@@ -1,1 +1,1 @@
-web: server/target/universal/stage/bin/TigerClaws -Dhttp.port=${PORT}
+web: server/target/universal/stage/bin/tigerclaws -Dhttp.port=${PORT}
