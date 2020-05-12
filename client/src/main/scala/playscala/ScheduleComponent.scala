@@ -7,6 +7,7 @@ import slinky.core.StatelessComponent
 import org.scalajs.dom.document
 import org.scalajs.dom.html
 import slinky.web.html._
+import slinky.core.facade.Fragment
 
 @react class ScheduleComponent extends StatelessComponent {
   case class Props(schedules: Map[String,Seq[shared.Course]], removeFromActiveSchedule: (shared.Course) => Unit, setActiveSchedule: (String) => Unit, createNewSchedule:(String) => Unit, activeSchedule:String)
@@ -35,17 +36,16 @@ import slinky.web.html._
     }
     else{
       props.schedules.zipWithIndex.map { case ((id, courses), idx) =>
-        singleSchedule(id, courses)
+        Fragment(key := idx.toString())(singleSchedule(id, courses))
       }
     }
   }
 
   def singleSchedule(id:String, courses:Seq[shared.Course]): ReactElement = {
-    //TODO replace with actual calc
-    val hours = courses.length*3
+    val hours = courses.map(_.course_number.substring(1,2).toInt).sum
     if(props.activeSchedule == id){
       //this is the active schedule
-      div(
+      div()(
         scheduleHeader(id, hours),
         div(className:="activeSched")(
           singleScheduleList(courses)
