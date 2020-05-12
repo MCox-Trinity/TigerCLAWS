@@ -16,13 +16,13 @@ import org.scalajs.dom.html
     val usernameRoute = document.getElementById("usernameRoute").asInstanceOf[html.Input].value
     val tigerLogoRoute = document.getElementById("tigerLogo").asInstanceOf[html.Input].value
 
-    def initialState: State = State(Nil, "{username not available yet}")
+    def initialState: State = State(Nil, "TigerClaws User")
 
     def render(): ReactElement = {
         div(id:="homePage") (
             div(id:="left")(
                 img(src:=tigerLogoRoute),
-                h1(s"Welcome Back, ${usernameRoute}!")
+                h1(s"Welcome Back, ${this.state.username}!")
             ),
             div(id:="right")(
                 section(
