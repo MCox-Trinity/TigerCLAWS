@@ -9,13 +9,15 @@ import org.scalajs.dom.html
 
 @react class ApplicationPageComponent extends Component {
   case class Props(doLogout: () => Unit)
-  case class State(loggedIn: Boolean, viewingPage: String,  scheduleCourses: Seq[shared.Course])
+  case class State(loggedIn: Boolean, viewingPage: String, schedules:Map[String, Seq[shared.Course]])
+
+  var activeSchedule = ""
 
   val logoutRoute = document.getElementById("logoutRoute").asInstanceOf[html.Input].value
     implicit val ec = scala.concurrent.ExecutionContext.global
 
   //Options: SearchForSections, Home
-  def initialState: State = State(true,"Home", Nil)
+  def initialState: State = State(true,"SearchForSections", Map.empty[String, Seq[shared.Course]])
 
   def render(): ReactElement = {
       div(
@@ -36,16 +38,38 @@ import org.scalajs.dom.html
             case "SearchForSections" => SearchForSectionsComponent(() => Unit, 
                                                             (course: shared.Course) => addToActiveSchedule(course), 
                                                             (course: shared.Course) => removeFromActiveSchedule(course),
-                                                            state.scheduleCourses)
+                                                            state.schedules,
+                                                            (id:String) => setActiveScheduleTo(id),
+                                                            (id:String) => createNewSchedule(id),
+                                                            activeSchedule)
         }
+  }
+
+  def setActiveScheduleTo(id: String){
+      activeSchedule = id
+  }
+
+  private def createSchedule(id:String){
+      val updated = state.schedules+(id -> Seq.empty)
+      setState(state.copy(schedules = updated))
+  }
+
+  def createNewSchedule(id:String){
+      createSchedule(id)
   }
   
   def removeFromActiveSchedule(course: shared.Course) {
-      setState(state.copy(scheduleCourses = state.scheduleCourses.filter(c => c != course)))
+      setState(state.copy(schedules = state.schedules.updated(activeSchedule, state.schedules(activeSchedule).filter(c => c != course))))
+  }
+
+  private def activeScheduleContainsCourse(course: shared.Course): Boolean = {
+      state.schedules(activeSchedule).contains(course)
   }
 
   def addToActiveSchedule(course: shared.Course) {
-      setState(state.copy(scheduleCourses = state.scheduleCourses :+ course))
+      if(!activeScheduleContainsCourse(course)){
+          setState(state.copy(schedules = state.schedules.updated(activeSchedule, state.schedules(activeSchedule):+course)))
+      }
   }
 
   def setPage(id:String) = {

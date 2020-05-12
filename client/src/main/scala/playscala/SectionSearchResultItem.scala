@@ -28,6 +28,7 @@ import shared.ReadsAndWrites._
         else {
             div(className:="sectionSearchResultItem-open")(
                 itemTitle((() => close())),
+                p(className:="desc")(em("Location: "), props.course.location),
                 p(className:="desc")(em("Course Description: "), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit. Nibh sit amet commodo nulla facilisi nullam vehicula ipsum. Sit amet dictum sit amet justo donec enim diam. Fames ac turpis egestas integer eget aliquet nibh praesent tristique. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Cursus turpis massa tincidunt dui. Arcu non sodales neque sodales ut etiam. Varius sit amet mattis vulputate enim nulla aliquet porttitor. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque. Suspendisse sed nisi lacus sed viverra tellus in hac. Mi bibendum neque egestas congue.")
             )
         }

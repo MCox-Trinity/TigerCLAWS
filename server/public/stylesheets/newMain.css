@@ -355,35 +355,6 @@
     margin-top: 2em;
 }
 
-#filtersTab .btn{
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 1em;
-}
-
-#filtersTab .btn-primary {
-    background-color: rgb(147, 180, 64);
-    color: white;
-}
-
-#filtersTab .btn-primary:hover {
-    background-color: rgb(150, 202, 18);
-    color: white;
-}
-
-#filtersTab .btn-secondary{
-    background-color: #ac3a45;
-    color: white;
-}
-
-#filtersTab .btn-secondary:hover{
-    background-color: #ca182a;
-}
-
 #searchResults{
     background-color: #efefef;
     display: flex;
@@ -447,6 +418,107 @@
     font-weight: bold;
 }
 
+/* Schedule Planner */
+#schedulePlanner{
+    font-family: 'Sen', sans-serif;
+    padding: 1em;
+    line-height: 1.6em;
+    overflow-y: scroll;
+    height: calc(100vh - 50px);
+    padding-top: 2em;
+}
+
+#schedulePlanner #header{
+    margin-bottom: 1em;
+}
+
+#schedulePlanner #header h1{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#schedulePlanner #header p{
+    color: grey;
+    font-size: 1em;
+}
+
+#schedulePlanner #header img{
+    height: 1em;
+}
+
+#schedulePlanner #header #buttonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#schedulePlanner #header .btn{
+    padding: 10px 15px;
+    font-size: 1em;
+    margin-top: 0;
+}
+
+#schedulePlanner .instructions{
+    background-color: #efefef;
+    color: grey;
+    text-align: center;
+    padding: .5em;
+}
+
+#schedulePlanner .scheduleHeader{
+    background-color: #498DA0;
+    color: white;
+    line-height: 1.6em;
+    padding: .5em;
+    border-bottom: solid 1px white;
+}
+
+#schedulePlanner .activeSched{
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #efefef;
+}
+
+#schedulePlanner .scheduleItem, #schedulePlanner .scheduleItem-open{
+    background-color: white;
+    display: flex;
+    padding: .5em;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#schedulePlanner .scheduleItem-open .desc{
+    margin-top: 1.5em;
+    margin-left: 2em;
+}
+
+#schedulePlanner .itemTitle:hover{
+    background-color: rgb(212, 235, 238);
+}
+
+#schedulePlanner .itemTitle{
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+}
+#schedulePlanner .itemTitle .info{
+    flex: 12;
+}
+
+#schedulePlanner .itemTitle img{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+#schedulePlanner .itemTitle .title{
+    font-weight: bold;
+}
+
+#schedulePlanner .itemTitle .time{
+    margin-left: 2em;
+}
 /* Home page */
 
 #homePage{
@@ -508,6 +580,36 @@
     color: #780410;
 }
 
+/* General Stuff */
+/* Buttons */
+.btn{
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 1em;
+}
+
+.btn-primary {
+    background-color: rgb(147, 180, 64);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: rgb(150, 202, 18);
+    color: white;
+}
+
+.btn-secondary{
+    background-color: #ac3a45;
+    color: white;
+}
+
+.btn-secondary:hover{
+    background-color: #ca182a;
+}
 
 /* Checkbox Drama */
 .checkbox {

@@ -15,7 +15,10 @@ import shared.ReadsAndWrites._
     case class Props(help: () => Unit, 
         addToActiveSchedule: (shared.Course) => Unit, 
         removeFromActiveSchedule: (shared.Course) => Unit, 
-        scheduleCourses: Seq[shared.Course])
+        schedules: Map[String, Seq[shared.Course]],
+        setActiveSchedule: (String) => Unit, 
+        createNewSchedule:(String) => Unit,
+        activeSchedule:String)
 
     case class State(currentPanelID:String, courses: Seq[shared.Course])
 
@@ -30,7 +33,7 @@ import shared.ReadsAndWrites._
             ),
         ),
         div(id := "schedulePlanning")(
-            ScheduleComponent(props.scheduleCourses, props.removeFromActiveSchedule)
+            ScheduleComponent(props.schedules, props.removeFromActiveSchedule, props.setActiveSchedule, props.createNewSchedule, props.activeSchedule)
         )
     )
 
