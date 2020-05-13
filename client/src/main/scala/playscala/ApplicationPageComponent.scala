@@ -17,7 +17,7 @@ import org.scalajs.dom.html
     implicit val ec = scala.concurrent.ExecutionContext.global
 
   //Options: SearchForSections, Home
-  def initialState: State = State(true,"SearchForSections", Map.empty[String, Seq[shared.Course]])
+  def initialState: State = State(true,"Home", Map.empty[String, Seq[shared.Course]])
 
   def render(): ReactElement = {
       div(
